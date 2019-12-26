@@ -8,6 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
+from driver import *
 
 
 class Ui_MainWindow(object):
@@ -530,6 +532,8 @@ class Ui_MainWindow(object):
         self.actionExit.triggered.connect(MainWindow.close)
         self.actionOff.triggered['bool'].connect(self.actionOn.toggle)
         self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
+        self.actionOpen_PCC_Telemetry_File.triggered.connect(self.connector_openPCCTelemetryFile)
+        self.actionDefine_Manual_Limts.triggered.connect(self.connector_openLimitsDialog)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -584,6 +588,11 @@ class Ui_MainWindow(object):
         self.actionOn.setText(_translate("MainWindow", "On"))
         self.actionOff.setText(_translate("MainWindow", "Off"))
 
+    def connector_openPCCTelemetryFile(self):
+        openPCCTelemetryFile(self)
+
+    def connector_openLimitsDialog(self):
+        openLimitsDialog(self)
 
 if __name__ == "__main__":
     import sys
