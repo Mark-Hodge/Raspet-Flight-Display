@@ -527,6 +527,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuLog.menuAction())
         self.menubar.addAction(self.menuLimits.menuAction())
 
+        # Button / Action Connectors
         self.retranslateUi(MainWindow)
         self.pushButton_toolBar_stop.clicked.connect(MainWindow.close)
         self.actionExit.triggered.connect(MainWindow.close)
@@ -534,6 +535,8 @@ class Ui_MainWindow(object):
         self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
         self.actionOpen_PCC_Telemetry_File.triggered.connect(self.connector_openPCCTelemetryFile)
         self.actionDefine_Manual_Limts.triggered.connect(self.connector_openLimitsDialog)
+        self.pushButton_toolBar_start.clicked.connect(self.connector_startTracking)
+        self.pushButton_toolBar_stop.clicked.connect(self.connector_stopTracking)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -587,6 +590,14 @@ class Ui_MainWindow(object):
         self.actionDefine_Manual_Limts.setText(_translate("MainWindow", "Manually Define Limts"))
         self.actionOn.setText(_translate("MainWindow", "On"))
         self.actionOff.setText(_translate("MainWindow", "Off"))
+
+    def connector_startTracking(self):
+        # Pass start value set as 1 (True) to start tracking telemetry
+        startTracking(self, 1)
+
+    def connector_stopTracking(self):
+        # Pass stop value set as 1 (True) to stop tracking telemetry but not terminate program
+        stopTracking(self, 1)
 
     def connector_openPCCTelemetryFile(self):
         openPCCTelemetryFile(self)

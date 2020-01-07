@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from limitsDialogHandler import *
 
 
 class Ui_Dialog(object):
@@ -180,7 +181,7 @@ class Ui_Dialog(object):
         self.verticalLayout_5.addWidget(self.buttonBox)
 
         self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
+        self.buttonBox.accepted.connect(self.connector_buttonBoxAccept)
         self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -194,6 +195,9 @@ class Ui_Dialog(object):
         self.label_pitchRate.setText(_translate("Dialog", "Pitch Rate:"))
         self.label_rollRate.setText(_translate("Dialog", "Roll Rate:"))
         self.label_yawRate.setText(_translate("Dialog", "Yaw Rate:"))
+
+    def connector_buttonBoxAccept(self):
+        limitsDialogHandler(self)
 
 
 # if __name__ == "__main__":
