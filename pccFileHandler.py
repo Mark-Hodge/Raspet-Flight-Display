@@ -1,9 +1,10 @@
 
 import os
 from PyQt5.QtWidgets import QFileDialog
+from dataHandler import DataHandler
 
 # ====================================================================================================================== Open File()
-def OpenFile(self):
+def openFile(self):
 
     # Call file navigator on mouse click and display path on screen
     try:
@@ -18,7 +19,7 @@ def OpenFile(self):
         fh.seek(0, os.SEEK_END)
         print("File Successfully Opened and cursor moved to EOF")       # TODO: DEBUGGING PURPOSES ONLY (delete print statement later)
         self.label_toolBar_PCCFile.setText("PCC Telemetry File: " + str(PCCTelemetryFile[0]))
-        return fh
+        # DataHandler.
 
     # Hand errors in opening or navigating to EOF
     except Exception as ex:
@@ -26,7 +27,7 @@ def OpenFile(self):
 
 
 # ====================================================================================================================== Retrive PCC Log()
-def RetrievePCCLog(self):
+def retrievePCCLog(self):
     fh = self.fh        # Initialize local file header encase corrupted (allows restart with correct file header)
 
     # Iterate while incoming data

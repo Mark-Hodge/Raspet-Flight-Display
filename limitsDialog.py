@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from limitsDialogHandler import *
-
+from mainInterface import *
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -197,7 +197,7 @@ class Ui_Dialog(object):
         self.label_yawRate.setText(_translate("Dialog", "Yaw Rate:"))
 
     def connector_buttonBoxAccept(self):
-        limitsDialogHandler(self)
+        getLimits(self)
 
 
 # if __name__ == "__main__":
