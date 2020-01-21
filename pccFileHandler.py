@@ -1,7 +1,9 @@
 
 import os
+from dataTransformer import PopulateDictionary
 from PyQt5.QtWidgets import QFileDialog
 from dataHandler import DataHandler
+
 
 # ====================================================================================================================== Open File()
 def openFile(self):
@@ -16,10 +18,14 @@ def openFile(self):
     # Open file and move cursor to EOF
     try:
         fh = open(PCCTelemetryFile[0], 'r')
-        fh.seek(0, os.SEEK_END)
+        # fh.seek(0, os.SEEK_END)   TODO: Uncomment for production version. Ignored for testing purposes while not working with live telemetry
         print("File Successfully Opened and cursor moved to EOF")       # TODO: DEBUGGING PURPOSES ONLY (delete print statement later)
         self.label_toolBar_PCCFile.setText("PCC Telemetry File: " + str(PCCTelemetryFile[0]))
-        # DataHandler.
+
+        # Store file path in DataHandler encase restart or failure, file path can be retrieved and re-opened.
+        DataHandler.setTelemetryFile(fh)
+        DataHandler.resetRawTelemetryData()
+
 
     # Hand errors in opening or navigating to EOF
     except Exception as ex:
@@ -27,8 +33,8 @@ def openFile(self):
 
 
 # ====================================================================================================================== Retrive PCC Log()
-def retrievePCCLog(self):
-    fh = self.fh        # Initialize local file header encase corrupted (allows restart with correct file header)
+def retrievePCCLog():
+    fh = DataHandler.getTelemetryFile()        # Initialize local file header encase corrupted (allows restart with correct file header)
 
     # Iterate while incoming data
     while 1:
@@ -79,4 +85,4 @@ def retrievePCCLog(self):
             continue
 
         # Pass complete data segment for use in populating dictionary
-        self.PopulateDict(dataSegment)
+        PopulateDictionary(dataSegment)

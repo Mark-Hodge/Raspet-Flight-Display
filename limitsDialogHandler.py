@@ -11,6 +11,6 @@ def getLimits(self):
     pitchRateLimit = self.doubleSpinBox_pitchRate.value()
     rollRateLimit = self.doubleSpinBox_rollRate.value()
     yawRateLimit = self.doubleSpinBox_yawRate.value()
-    print(yawRateLimit)
+    print(yawRateLimit) # TODO: Delete after debugging
     DataHandler.setManuallyDefinedLimts({"elevatorPositionLimit": elevatorPositionLimit, "aileronPositionLimit": aileronPositionLimit, "rudderPositionLimit": rudderPositionLimit,
                                      "pitchRateLimit": pitchRateLimit, "rollRateLimit": rollRateLimit, "yawRateLimit": yawRateLimit})

@@ -1,6 +1,6 @@
 
 from limitsdialog import Ui_Dialog as Form, Ui_Dialog
-from pccFileHandler import openFile
+from pccFileHandler import retrievePCCLog, openFile
 from mainInterface import *
 
 
@@ -19,13 +19,13 @@ def openPCCTelemetryFile(self):
     except Exception as ex:
         print("Could not open Telemetry File (check file type and try again).", ex)
 
-def startTracking(self):
+def startTracking(self, i):
     """
     Under Construction
     Further implementation needed later on
     """
-    pushButton_toolBar_start = self.pushButton_toolBar_start
-
+    # pushButton_toolBar_start = self.pushButton_toolBar_start
+    retrievePCCLog()
 
 def stopTracking(self, stopValue = 0):
 
