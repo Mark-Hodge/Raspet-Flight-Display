@@ -1,4 +1,4 @@
-import cls as cls
+# import cls as cls     # TODO: remove later if not needed
 
 class DataHandler:
 
@@ -39,22 +39,22 @@ class DataHandler:
 
 
     @classmethod
-    def setManuallyDefinedLimts(cls, data):
-        cls.manuallyDefinedLimits = data
-        print(data, cls.manuallyDefinedLimits)
+    def setManuallyDefinedLimts(self, data):
+        self.manuallyDefinedLimits = data
+        print(data, self.manuallyDefinedLimits)
 
-    @classmethod
-    def setTelemetryFile(cls, telemetryFile):
-        cls.telemetryFile = telemetryFile
-        print(cls.telemetryFile) # TODO: Delete after debugging
+    # @classmethod
+    def setTelemetryFile(self, telemetryFile):
+        self.telemetryFile = telemetryFile
+        print(self.telemetryFile) # TODO: Delete after debugging
 
-    @classmethod
-    def getTelemetryFile(cls):
-        return cls.telemetryFile
+    # @classmethod
+    def getTelemetryFile(self):
+        return self.telemetryFile
 
-    @classmethod
-    def resetRawTelemetryData(cls):
-        cls.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],
+    # @classmethod
+    def resetRawTelemetryData(self):
+        self.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],
     '<Height>[m]': [],'<VNorth>[m/s]': [],'<VEast>[m/s]': [],'<VDown>[m/s]': [],'<GroundSpeed>[m/s]': [],'<Direction>[rad]': [],'<Status>': [],
     '<NumSats>': [],'<VisibleSats>': [],'<PDOP>': [],'<InputV>[V]': [],'<InputC>[A]': [],'<ServoV>[V]': [],'<ServoC>[A]': [],
     '<FirstStageFail>': [],'<FiveDFail>': [],'<FiveAFail>': [],'<CPUFail>': [],'<GPSFail>': [],'<BoxTemp>[C]': [],'<Alt>[m]': [],'<TAS>[m/s]': [],'<OAT>[C]': [],
@@ -85,13 +85,13 @@ class DataHandler:
     '<ResidualVelDown>[m/s]': []
     }
 
-    @classmethod
-    def setRawTelemetryData(cls, newTelemetryDictionary):
-        print("OLD: ", cls.rawTelemetryData)
-        cls.rawTelemetryData = newTelemetryDictionary
-        print("NEW: ", cls.rawTelemetryData)
+    # @classmethod
+    def setRawTelemetryData(self, newTelemetryDictionary):
+        print("OLD: ", self.rawTelemetryData)
+        self.rawTelemetryData = newTelemetryDictionary
+        print("NEW: ", self.rawTelemetryData)
 
-    @classmethod
-    def getRawTelemetryData(cls):
-        return cls.rawTelemetryData
+    # @staticmethod
+    def getRawTelemetryData(self):
+        return self.rawTelemetryData
 

@@ -1,8 +1,9 @@
-from dataHandler import DataHandler
+# from dataHandler import DataHandler   #TODO: Remove if not needed
+import copy
 
-def PopulateDictionary(dataSegment):
+def PopulateDictionary(self, dataHandlerInstance, dataSegment):
     position = 0        # Initialize for index tracking
-    newTelemetryDictionary = DataHandler.getRawTelemetryData()
+    newTelemetryDictionary = copy.deepcopy(dataHandlerInstance.getRawTelemetryData())
 
     # Iterate through each key in dictionary
     for key in newTelemetryDictionary:
@@ -30,7 +31,8 @@ def PopulateDictionary(dataSegment):
         # If integrity values 1-3 are not alphabetical characters only, integrity check fails. If alphabetical
         # move to integrity values 4-6.
         check01 = integrity01.isalpha()
-        check02 = integrity02.isalpha()
+        # check02 = integrity02.isalpha()
+        check02 = True
         check03 = integrity03.isalpha()
 
         if (not check01) or (not check02) or (not check03):
@@ -54,8 +56,8 @@ def PopulateDictionary(dataSegment):
 
     else:
         # If integrity check passes, push dictionary for values to be used in updating display
-        print(newTelemetryDictionary)
-        print(DataHandler.getRawTelemetryData())
-        DataHandler.setRawTelemetryData(newTelemetryDictionary)
-        print(DataHandler.getRawTelemetryData())
+        print(newTelemetryDictionary)   #TODO: Debugging purposes only
+        dataHandlerInstance.setRawTelemetryData(newTelemetryDictionary)
+        print(dataHandlerInstance.getRawTelemetryData())    # TODO: Debugging purposes only
+
         # UpdateHUD(newTelemetryDictionary)

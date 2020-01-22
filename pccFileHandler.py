@@ -1,12 +1,12 @@
 
-import os
+# import os   # TODO: remove later if not needed
 from dataTransformer import PopulateDictionary
 from PyQt5.QtWidgets import QFileDialog
-from dataHandler import DataHandler
+# from dataHandler import DataHandler   # TODO: remove later if not needed
 
 
 # ====================================================================================================================== Open File()
-def openFile(self):
+def openFile(self, dataHandlerInstance):
 
     # Call file navigator on mouse click and display path on screen
     try:
@@ -23,8 +23,8 @@ def openFile(self):
         self.label_toolBar_PCCFile.setText("PCC Telemetry File: " + str(PCCTelemetryFile[0]))
 
         # Store file path in DataHandler encase restart or failure, file path can be retrieved and re-opened.
-        DataHandler.setTelemetryFile(fh)
-        DataHandler.resetRawTelemetryData()
+        dataHandlerInstance.setTelemetryFile(fh)
+        dataHandlerInstance.resetRawTelemetryData()
 
 
     # Hand errors in opening or navigating to EOF
@@ -33,8 +33,8 @@ def openFile(self):
 
 
 # ====================================================================================================================== Retrive PCC Log()
-def retrievePCCLog():
-    fh = DataHandler.getTelemetryFile()        # Initialize local file header encase corrupted (allows restart with correct file header)
+def retrievePCCLog(self, dataHandlerInstance):
+    fh = dataHandlerInstance.getTelemetryFile()        # Initialize local file header encase corrupted (allows restart with correct file header)
 
     # Iterate while incoming data
     while 1:
@@ -85,4 +85,4 @@ def retrievePCCLog():
             continue
 
         # Pass complete data segment for use in populating dictionary
-        PopulateDictionary(dataSegment)
+        PopulateDictionary(self, dataHandlerInstance, dataSegment, )

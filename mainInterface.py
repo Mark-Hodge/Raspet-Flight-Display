@@ -592,11 +592,11 @@ class Ui_MainWindow(object):
         self.actionOff.setText(_translate("MainWindow", "Off"))
 
     def connector_startTracking(self):
-        # Pass start value set as 1 (True) to start tracking telemetry
-        startTracking(self, 1)
+        # Pass start value set as 1 (True) to start tracking telemetry #Fixme: change this later
+        startTracking(self)
 
     def connector_stopTracking(self):
-        # Pass stop value set as 1 (True) to stop tracking telemetry but not terminate program
+        # Pass stop value set as 1 (True) to stop tracking telemetry but not terminate program #FIXME: change this later
         stopTracking(self, 1)
 
     def connector_openPCCTelemetryFile(self):
