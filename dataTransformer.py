@@ -1,5 +1,6 @@
 # from dataHandler import DataHandler   #TODO: Remove if not needed
 import copy
+from dataValidator import *
 
 def PopulateDictionary(self, dataHandlerInstance, dataSegment):
     position = 0        # Initialize for index tracking
@@ -60,4 +61,4 @@ def PopulateDictionary(self, dataHandlerInstance, dataSegment):
         dataHandlerInstance.setRawTelemetryData(newTelemetryDictionary)
         print(dataHandlerInstance.getRawTelemetryData())    # TODO: Debugging purposes only
 
-        # UpdateHUD(newTelemetryDictionary)
+        UpdateHUD(self, dataHandlerInstance)
