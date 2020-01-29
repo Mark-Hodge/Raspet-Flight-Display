@@ -36,12 +36,19 @@ class DataHandler:
     '<ResidualPosNorth>[m]': [],'<ResidualPosEast>[m]': [],'<ResidualPosDown>[m]': [],'<ResidualVelNorth>[m/s]': [],'<ResidualVelEast>[m/s]': [],
     '<ResidualVelDown>[m/s]': []
     }
+        self.rawDataSegment = []
 
 
     @classmethod
     def setManuallyDefinedLimts(self, data):
         self.manuallyDefinedLimits = data
         print(data, self.manuallyDefinedLimits)
+
+    def setDataSegment(self, dataSegment):
+        self.rawDataSegment = dataSegment
+
+    def getDataSegment(self):
+        return self.rawDataSegment
 
     # @classmethod
     def setTelemetryFile(self, telemetryFile):

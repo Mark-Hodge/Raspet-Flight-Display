@@ -2,12 +2,14 @@
 import copy
 from dataValidator import *
 
-def PopulateDictionary(self, dataHandlerInstance, dataSegment):
+def PopulateDictionary(dataHandler):
     position = 0        # Initialize for index tracking
-    newTelemetryDictionary = copy.deepcopy(dataHandlerInstance.getRawTelemetryData())
+    # newTelemetryDictionary = copy.deepcopy(dataHandler.getRawTelemetryData())
+    newTelemetryDict = dataHandler.getRawTelemetryData()
+    dataSegment = dataHandler.getDataSegment()
 
     # Iterate through each key in dictionary
-    for key in newTelemetryDictionary:
+    for key in newTelemetryDict:
 
         # If position moved pass index length, break from loop
         if position >= len(dataSegment):
@@ -15,19 +17,19 @@ def PopulateDictionary(self, dataHandlerInstance, dataSegment):
 
         # If position is valid, copy corresponding dataSegment value to dictionary key and increment position
         else:
-            newTelemetryDictionary[key] = dataSegment[position]
+            newTelemetryDict[key] = dataSegment[position]
             position += 1
 
     # Pull values from populated dictionary for quality checking, Keys used are parameters needed for display
     # or special values which will be corrupted by minor character shifts in the dictionary
     try:        # TODO: Re-asses the values used for checking the integrity of the data... find better values
-        integrity01 = newTelemetryDictionary['<AP_Global>']
-        integrity02 = newTelemetryDictionary['<NavMode>']
-        integrity03 = newTelemetryDictionary['<AlignSolnType>']
-        integrity04 = newTelemetryDictionary['<Clock>[ms]']
-        integrity05 = newTelemetryDictionary['<Surface3>']
-        integrity06 = newTelemetryDictionary['<Surface6>']
-        integrity07 = newTelemetryDictionary['<Surface0>']
+        integrity01 = newTelemetryDict['<AP_Global>']
+        integrity02 = newTelemetryDict['<NavMode>']
+        integrity03 = newTelemetryDict['<AlignSolnType>']
+        integrity04 = newTelemetryDict['<Clock>[ms]']
+        integrity05 = newTelemetryDict['<Surface3>']
+        integrity06 = newTelemetryDict['<Surface6>']
+        integrity07 = newTelemetryDict['<Surface0>']
 
         # If integrity values 1-3 are not alphabetical characters only, integrity check fails. If alphabetical
         # move to integrity values 4-6.
@@ -51,14 +53,15 @@ def PopulateDictionary(self, dataHandlerInstance, dataSegment):
     # Catch exception raised and print corrupted values and full set to console for analyzing. Dictionary is not passed to be used
     # in updating display. Values are ignored and program writes over dictionary with next loop.
     except Exception as ex2:
-        print("Integrity Check Failed: truncating entry. --> ", newTelemetryDictionary['<Clock>[ms]'], newTelemetryDictionary['<AP_Global>'],
-              newTelemetryDictionary['<NavMode>'], newTelemetryDictionary['<AlignSolnType>'], newTelemetryDictionary['<Surface3>'],
-              newTelemetryDictionary['<Surface0>'], newTelemetryDictionary['<Surface6>'], '\n--> corrupt entry', newTelemetryDictionary)
+        print("Integrity Check Failed: truncating entry. --> ", newTelemetryDict['<Clock>[ms]'], newTelemetryDict['<AP_Global>'],
+              newTelemetryDict['<NavMode>'], newTelemetryDict['<AlignSolnType>'], newTelemetryDict['<Surface3>'],
+              newTelemetryDict['<Surface0>'], newTelemetryDict['<Surface6>'], '\n--> corrupt entry', newTelemetryDict)
 
     else:
         # If integrity check passes, push dictionary for values to be used in updating display
-        print(newTelemetryDictionary)   #TODO: Debugging purposes only
-        dataHandlerInstance.setRawTelemetryData(newTelemetryDictionary)
-        print(dataHandlerInstance.getRawTelemetryData())    # TODO: Debugging purposes only
+        print(newTelemetryDict)   #TODO: Debugging purposes only
+        dataHandler.setRawTelemetryData(newTelemetryDict)
+        print(dataHandler.getRawTelemetryData())    # TODO: Debugging purposes only
 
-        UpdateHUD(self, dataHandlerInstance)
+        # UpdateHUD(self, dataHandlerInstance)
+        return 1

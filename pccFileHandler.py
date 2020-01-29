@@ -33,8 +33,8 @@ def openFile(self, dataHandlerInstance):
 
 
 # ====================================================================================================================== Retrive PCC Log()
-def retrievePCCLog(self, dataHandlerInstance):
-    fh = dataHandlerInstance.getTelemetryFile()        # Initialize local file header encase corrupted (allows restart with correct file header)
+def retrievePCCLog(dataHandler):
+    fh = dataHandler.getTelemetryFile()        # Initialize local file header encase corrupted (allows restart with correct file header)
 
     # Iterate while incoming data
     while 1:
@@ -85,4 +85,5 @@ def retrievePCCLog(self, dataHandlerInstance):
             continue
 
         # Pass complete data segment for use in populating dictionary
-        PopulateDictionary(self, dataHandlerInstance, dataSegment, )
+        dataHandler.setDataSegment(dataSegment)
+        return 1

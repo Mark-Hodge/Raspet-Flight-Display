@@ -3,44 +3,49 @@ import time, datetime, math
 
 
 # ====================================================================================================================== Update HUD()
-def UpdateHUD(self, dataHandlerInstance):
+def UpdateHUD(self, dataHandler):
 
     #TODO: This is bad programming, test to find if this is possible then correctly write this code
     #   Only need to store the necessary values in the data handler instance after checking against
     #   complete set and integrity
 
-    dict = copy.deepcopy(dataHandlerInstance.getRawTelemetryData())
+    dict = dataHandler.getRawTelemetryData()
 
+    try:
 
-    # ----------------------------------------------------------- Elevator pos.
-    surface6 = float(dict["<Surface6>"])
-    surface6 = math.degrees(surface6)
-    self.label_elevatorPositionValue.setText("{:.3f}".format(surface6))
+        # ----------------------------------------------------------- Elevator pos.
+        surface6 = float(dict["<Surface6>"])
+        surface6 = math.degrees(surface6)
+        self.label_elevatorPositionValue.setText("{:.3f}".format(surface6))
 
-    # ----------------------------------------------------------- Pitch rate.
-    pitchRate = float(dict["<P>[Rad/s]"])
-    pitchRate = math.degrees(pitchRate)
-    self.label_pitchRateValue.setText("{:.3f}".format(pitchRate))
+        # ----------------------------------------------------------- Pitch rate.
+        pitchRate = float(dict["<P>[rad/s]"])
+        pitchRate = math.degrees(pitchRate)
+        self.label_pitchRateValue.setText("{:.3f}".format(pitchRate))
 
-    # ----------------------------------------------------------- Left aileron pos.
-    surface0 = float(dict["<Surface0>"])
-    surface0 = math.degrees(surface0)
-    self.label_aileronPositionValue.setText("{:.3f}".format(surface0))
+        # ----------------------------------------------------------- Left aileron pos.
+        surface0 = float(dict["<Surface0>"])
+        surface0 = math.degrees(surface0)
+        self.label_aileronPositionValue.setText("{:.3f}".format(surface0))
 
-    # ----------------------------------------------------------- Roll rate
-    rollRate = float(dict("<Q>[Rad/s]"))
-    rollRate = math.degrees(rollRate)
-    self.label_rollRateValue.setText("{:.3f}".format(rollRate))
+        # ----------------------------------------------------------- Roll rate
+        rollRate = float(dict["<Q>[rad/s]"])
+        rollRate = math.degrees(rollRate)
+        self.label_rollRateValue.setText("{:.3f}".format(rollRate))
 
-    # ----------------------------------------------------------- Rudder pos.
-    surface3 = float(dict["<Surface3>"])
-    surface3 = math.degrees(surface3)
-    self.label_rudderPositionValue.setText("{:.3f}".format(surface3))
+        # ----------------------------------------------------------- Rudder pos.
+        surface3 = float(dict["<Surface3>"])
+        surface3 = math.degrees(surface3)
+        self.label_rudderPositionValue.setText("{:.3f}".format(surface3))
 
-    # ----------------------------------------------------------- Yaw rate.
-    yawRate = float(dict("<R>[Rad/s]"))
-    yawRate = math.degrees(yawRate)
-    self.label_yawRateValue.setText("{:.3f}".format(yawRate))
+        # ----------------------------------------------------------- Yaw rate.
+        yawRate = float(dict["<R>[rad/s]"])
+        yawRate = math.degrees(yawRate)
+        self.label_yawRateValue.setText("{:.3f}".format(yawRate))
+
+    # FIXME: Re-write exception handling later, is for testing one update only.
+    except Exception as ex:
+        print("ERROR 1 handled, ", ex)
 
 
     # Check current values against user-defined limits and update display
