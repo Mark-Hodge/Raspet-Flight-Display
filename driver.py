@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QThreadPool, QRunnable, pyqtSlot
+
 from dataTransformer import PopulateDictionary
 from limitsdialog import Ui_Dialog as Form, Ui_Dialog
 from pccFileHandler import retrievePCCLog, openFile
@@ -33,16 +35,23 @@ def startTracking(self):
     # Will need to implement continuous iteration, exception handling, and interface updating.
     # As well as validation for each new set of telemetry data and checking against limit conditions
     """
-    test = retrievePCCLog(DataHandler)
 
-    test2 = PopulateDictionary(DataHandler)
+    try:
+        test = retrievePCCLog(DataHandler)
 
-    test3 = UpdateHUD(self, DataHandler)
+        test2 = PopulateDictionary(DataHandler)
+
+        test3 = UpdateHUD(self, DataHandler)
+        return 1
+
+    except Exception as ex:
+        print("Caught exception here, ", ex)
+        return 1
 
 
 
-def stopTracking(self, stopValue = 0):
+def stopTracking(self):
 
-    print(str(stopValue))
-    pushButton_toolBar_stop = self.pushButton_toolBar_stop.isChecked()
-    print("pushButton_toolBar_stop --> ", str(pushButton_toolBar_stop))
+    self.trackCondition = 0
+    # pushButton_toolBar_stop = self.pushButton_toolBar_stop.isChecked()
+    # print("pushButton_toolBar_stop --> ", str(pushButton_toolBar_stop))

@@ -43,6 +43,7 @@ def UpdateHUD(self, dataHandler):
         yawRate = math.degrees(yawRate)
         self.label_yawRateValue.setText("{:.3f}".format(yawRate))
 
+
     # FIXME: Re-write exception handling later, is for testing one update only.
     except Exception as ex:
         print("ERROR 1 handled, ", ex)

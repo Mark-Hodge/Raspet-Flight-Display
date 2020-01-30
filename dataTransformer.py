@@ -5,7 +5,7 @@ from dataValidator import *
 def PopulateDictionary(dataHandler):
     position = 0        # Initialize for index tracking
     # newTelemetryDictionary = copy.deepcopy(dataHandler.getRawTelemetryData())
-    newTelemetryDict = dataHandler.getRawTelemetryData()
+    newTelemetryDict = copy.deepcopy(dataHandler.getRawTelemetryData())
     dataSegment = dataHandler.getDataSegment()
 
     # Iterate through each key in dictionary

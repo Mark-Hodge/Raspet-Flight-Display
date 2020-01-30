@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QApplication
 from driver import *
 
 
@@ -529,7 +529,7 @@ class Ui_MainWindow(object):
 
         # Button / Action Connectors
         self.retranslateUi(MainWindow)
-        self.pushButton_toolBar_stop.clicked.connect(MainWindow.close)
+        # self.pushButton_toolBar_stop.clicked.connect(MainWindow.close)
         self.actionExit.triggered.connect(MainWindow.close)
         self.actionOff.triggered['bool'].connect(self.actionOn.toggle)
         self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
@@ -593,11 +593,15 @@ class Ui_MainWindow(object):
 
     def connector_startTracking(self):
         # Pass start value set as 1 (True) to start tracking telemetry #Fixme: change this later
-        startTracking(self)
+        self.trackCondition = 1
+        while (self.trackCondition):
+            startTracking(self)
+            QApplication.processEvents()
 
     def connector_stopTracking(self):
         # Pass stop value set as 1 (True) to stop tracking telemetry but not terminate program #FIXME: change this later
-        stopTracking(self, 1)
+        stopTracking(self)
+        QApplication.processEvents()
 
     def connector_openPCCTelemetryFile(self):
         openPCCTelemetryFile(self)
