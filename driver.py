@@ -37,11 +37,9 @@ def startTracking(self):
     """
 
     try:
-        test = retrievePCCLog(DataHandler)
-
-        test2 = PopulateDictionary(DataHandler)
-
-        test3 = UpdateHUD(self, DataHandler)
+        retrievePCCLog(DataHandler)
+        PopulateDictionary(DataHandler)
+        UpdateHUD(self, DataHandler)
         return 1
 
     except Exception as ex:

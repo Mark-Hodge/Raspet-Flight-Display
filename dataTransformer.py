@@ -53,15 +53,14 @@ def PopulateDictionary(dataHandler):
     # Catch exception raised and print corrupted values and full set to console for analyzing. Dictionary is not passed to be used
     # in updating display. Values are ignored and program writes over dictionary with next loop.
     except Exception as ex2:
-        print("Integrity Check Failed: truncating entry. --> ", newTelemetryDict['<Clock>[ms]'], newTelemetryDict['<AP_Global>'],
+        print("\nIntegrity Check Failed: truncating entry. --> ", newTelemetryDict['<Clock>[ms]'], newTelemetryDict['<AP_Global>'],
               newTelemetryDict['<NavMode>'], newTelemetryDict['<AlignSolnType>'], newTelemetryDict['<Surface3>'],
-              newTelemetryDict['<Surface0>'], newTelemetryDict['<Surface6>'], '\n--> corrupt entry', newTelemetryDict)
+              newTelemetryDict['<Surface0>'], newTelemetryDict['<Surface6>'], '\n--> corrupt entry', newTelemetryDict, ex2, "\n")
 
     else:
         # If integrity check passes, push dictionary for values to be used in updating display
-        print(newTelemetryDict)   #TODO: Debugging purposes only
+        # print(newTelemetryDict)   #TODO: Debugging purposes only
         dataHandler.setRawTelemetryData(newTelemetryDict)
-        print(dataHandler.getRawTelemetryData())    # TODO: Debugging purposes only
+        # print(dataHandler.getRawTelemetryData())    # TODO: Debugging purposes only
 
-        # UpdateHUD(self, dataHandlerInstance)
         return 1

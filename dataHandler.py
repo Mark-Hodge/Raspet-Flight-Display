@@ -50,16 +50,13 @@ class DataHandler:
     def getDataSegment(self):
         return self.rawDataSegment
 
-    # @classmethod
     def setTelemetryFile(self, telemetryFile):
         self.telemetryFile = telemetryFile
         print(self.telemetryFile) # TODO: Delete after debugging
 
-    # @classmethod
     def getTelemetryFile(self):
         return self.telemetryFile
 
-    # @classmethod
     def resetRawTelemetryData(self):
         self.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],
     '<Height>[m]': [],'<VNorth>[m/s]': [],'<VEast>[m/s]': [],'<VDown>[m/s]': [],'<GroundSpeed>[m/s]': [],'<Direction>[rad]': [],'<Status>': [],
@@ -92,13 +89,11 @@ class DataHandler:
     '<ResidualVelDown>[m/s]': []
     }
 
-    # @classmethod
     def setRawTelemetryData(self, newTelemetryDictionary):
-        print("OLD: ", self.rawTelemetryData)
+        print("OLD: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
         self.rawTelemetryData = newTelemetryDictionary
-        print("NEW: ", self.rawTelemetryData)
+        print("NEW: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
 
-    # @staticmethod
     def getRawTelemetryData(self):
         return self.rawTelemetryData
 
