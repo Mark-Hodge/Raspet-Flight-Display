@@ -42,7 +42,7 @@ def openFile(self, dataHandlerInstance):
     # Open file and move cursor to EOF
     try:
         fh = open(PCCTelemetryFile[0], 'r')
-        # fh.seek(0, os.SEEK_END)   # TODO: Uncomment for production version. Ignored for testing purposes while not working with live telemetry
+        fh.seek(0, os.SEEK_END)   # TODO: Uncomment for production version. Ignored for testing purposes while not working with live telemetry
 
         # Set GUI label to file path
         self.label_toolBar_PCCFile.setText("PCC Telemetry File: " + str(PCCTelemetryFile[0]))
