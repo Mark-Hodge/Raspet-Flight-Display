@@ -81,8 +81,8 @@ class DataHandler:
         print(data, self.manuallyDefinedLimits)
 
     def setWriter(self):
-        self.Writer = csv.DictWriter(self.outputLogFile[0], fieldnames=self.fieldnames)
-        self.Writer.writeheader()
+        self.writer = csv.DictWriter(self.outputLogFile, fieldnames=self.fieldnames)
+        self.writer.writeheader()
 
     def getFlagState(self):
         return self.flagState

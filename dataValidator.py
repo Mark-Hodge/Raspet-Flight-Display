@@ -45,9 +45,9 @@ def UpdateHUD(self, dataHandler):
         self.label_yawRateValue.setText("{:.3f}".format(yawRate))
 
         # Check current values against limits and update display
-        CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate)
-        CheckRollDeflectionConditions(self, aileronDeflection, rollRate)
-        CheckYawDeflectionConditions(self, rudderDeflection, yawRate)
+        CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHandler)
+        CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler)
+        CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler)
 
         # Set position and rate values to dictionary to be written to output log.
         dataHandler.finalDataToLog["Clock[ms]"] = dict["<Clock>[ms]"]

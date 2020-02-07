@@ -16,7 +16,7 @@ def FileHandler_OpenOutputLogFile(self, dataHandlerInstance):
 
     # Open or create file and move cursor to EOF.
     try:
-        fh = open(outputLogFile[0], 'w')
+        fh = open(outputLogFile[0], 'a', newline='')
         fh.seek(0, os.SEEK_END)
 
         # Set GUI label to file path
@@ -64,7 +64,7 @@ def writeToLogFile(dataHandlerInstance):
         dataHandlerInstance.writer.writerow({"Flag": "1", "Clock[ms]": dataHandlerInstance.finalDataToLog["Clock[ms]"], "Elevator Deflection[deg]": dataHandlerInstance.finalDataToLog["Elevator Deflection[deg]"],
                                              "Pitch Rate[deg/s]": dataHandlerInstance.finalDataToLog["Pitch Rate[deg/s]"], "Aileron Deflection[deg]": dataHandlerInstance.finalDataToLog["Aileron Deflection[deg]"],
                                              "Roll Rate[deg/s]": dataHandlerInstance.finalDataToLog["Roll Rate[deg/s]"], "Rudder Deflection[deg]": dataHandlerInstance.finalDataToLog["Rudder Deflection[deg]"],
-                                             "Yaw Rate[deg/s]": dataHandlerInstance.finalDataToLog["Yaw Rate[deg/s]"], "Pitch Rate Warning Condition": dataHandlerInstance.finalDataToLog["Pitch Rate Warning Condition"],
+                                             "Yaw Rate[deg/s]": dataHandlerInstance.finalDataToLog["Yaw Rate[deg/s]"], "Pitch Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Pitch Rate Warning Condition[deg]"],
                                              "Pitch Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Pitch Rate Alert Condition[deg]"], "Roll Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Warning Condition[deg]"],
                                              "Roll Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Alert Condition[deg]"], "Yaw Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Warning Condition[deg]"],
                                              "Yaw Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Alert Condition[deg]"], "Pitch Deflection State": dataHandlerInstance.finalDataToLog["Pitch Deflection State"],
@@ -74,7 +74,7 @@ def writeToLogFile(dataHandlerInstance):
         dataHandlerInstance.writer.writerow({"Flag": "0", "Clock[ms]": dataHandlerInstance.finalDataToLog["Clock[ms]"], "Elevator Deflection[deg]": dataHandlerInstance.finalDataToLog["Elevator Deflection[deg]"],
                                              "Pitch Rate[deg/s]": dataHandlerInstance.finalDataToLog["Pitch Rate[deg/s]"], "Aileron Deflection[deg]": dataHandlerInstance.finalDataToLog["Aileron Deflection[deg]"],
                                              "Roll Rate[deg/s]": dataHandlerInstance.finalDataToLog["Roll Rate[deg/s]"], "Rudder Deflection[deg]": dataHandlerInstance.finalDataToLog["Rudder Deflection[deg]"],
-                                             "Yaw Rate[deg/s]": dataHandlerInstance.finalDataToLog["Yaw Rate[deg/s]"], "Pitch Rate Warning Condition": dataHandlerInstance.finalDataToLog["Pitch Rate Warning Condition"],
+                                             "Yaw Rate[deg/s]": dataHandlerInstance.finalDataToLog["Yaw Rate[deg/s]"], "Pitch Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Pitch Rate Warning Condition[deg]"],
                                              "Pitch Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Pitch Rate Alert Condition[deg]"], "Roll Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Warning Condition[deg]"],
                                              "Roll Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Alert Condition[deg]"], "Yaw Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Warning Condition[deg]"],
                                              "Yaw Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Alert Condition[deg]"], "Pitch Deflection State": dataHandlerInstance.finalDataToLog["Pitch Deflection State"],

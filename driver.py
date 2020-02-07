@@ -58,6 +58,7 @@ def startTracking(self):
 
     except Exception as ex:
         print("REVISE THIS ERROR MESSAGE: ", ex)
+
     # Initiate telemetry tracking and call methods
     try:
         self.label_infoBar_status.setText("Status: Tracking")
