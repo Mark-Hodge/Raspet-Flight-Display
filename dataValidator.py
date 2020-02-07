@@ -49,16 +49,30 @@ def UpdateHUD(self, dataHandler):
         CheckRollDeflectionConditions(self, aileronDeflection, rollRate)
         CheckYawDeflectionConditions(self, rudderDeflection, yawRate)
 
+        # Set position and rate values to dictionary to be written to output log.
+        dataHandler.finalDataToLog["Clock[ms]"] = dict["<Clock>[ms]"]
+
+        dataHandler.finalDataToLog["Elevator Deflection[deg]"] = elevatorDeflection
+        dataHandler.finalDataToLog["Aileron Deflection[deg]"] = aileronDeflection
+        dataHandler.finalDataToLog["Rudder Deflection[deg]"] = rudderDeflection
+
+        dataHandler.finalDataToLog["Pitch Rate[deg/s]"] = pitchRate
+        dataHandler.finalDataToLog["Roll Rate[deg/s]"] = rollRate
+        dataHandler.finalDataToLog["Yaw Rate[deg/s]"] = yawRate
+
     # FIXME: Re-write exception handling later, is for testing one update only
     except Exception as ex:
         print("\n --> ERROR 1 handled, ", ex, "\n")
 
 # ====================================================================================================================== Check Pitch Conditions()
-def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate):
+def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHandler):
 
-    # --------------------------------------------------------------------------------------------- Warning condition.
     warningCondition = 1.1 * ((2.0761 * elevatorDeflection) + 7.3747)
     alertCondition   = 1.2 * ((2.0761 * elevatorDeflection) + 7.3747)
+
+    # Set warning and alert conditions to data to write to output log
+    dataHandler.finalDataToLog["Pitch Rate Warning Condition[deg]"] = warningCondition
+    dataHandler.finalDataToLog["Pitch Rate Alert Condition[deg]"] = warningCondition
 
     if (pitchRate <= warningCondition):
 
@@ -66,11 +80,15 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate):
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: red;}')
         self.pushButton_pitchDeflection.setText("Warning")
 
+        dataHandler.finalDataToLog["Pitch Deflection State"] = "Warning"
+
     elif (pitchRate <= alertCondition):
 
         self.label_pitchDeflectionValue.setText("{:.3f}".format(alertCondition))
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
         self.pushButton_pitchDeflection.setText("Alert")
+
+        dataHandler.finalDataToLog["Pitch Deflection State"] = "Alert"
 
     else:
         labelValue = ("Normal")
@@ -78,12 +96,18 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate):
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
         self.pushButton_pitchDeflection.setText("Normal")
 
-# ====================================================================================================================== Check Roll Conditions()
-def CheckRollDeflectionConditions(self, aileronDeflection, rollRate):
 
-    # --------------------------------------------------------------------------------------------- Warning condition.
+        dataHandler.finalDataToLog["Pitch Deflection State"] = "Normal"
+
+# ====================================================================================================================== Check Roll Conditions()
+def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler):
+
     warningCondition = 1.1 * ((2.8471 * aileronDeflection) + 1.5321)
     alertCondition = 1.2 * ((2.8471 * aileronDeflection) + 1.5321)
+
+    # Set warning and alert conditions to data to write to output log
+    dataHandler.finalDataToLog["Roll Rate Warning Condition[deg]"] = warningCondition
+    dataHandler.finalDataToLog["Roll Rate Alert Condition[deg]"] = warningCondition
 
     if (rollRate <= warningCondition):
 
@@ -91,11 +115,15 @@ def CheckRollDeflectionConditions(self, aileronDeflection, rollRate):
         self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: red;}')
         self.pushButton_rollDeflection.setText("Warning")
 
+        dataHandler.finalDataToLog["Roll Deflection State"] = "Warning"
+
     elif (rollRate <= alertCondition):
 
         self.label_rollDeflectionValue.setText("{:.3f}".format(alertCondition))
         self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
         self.pushButton_rollDeflection.setText("Alert")
+
+        dataHandler.finalDataToLog["Roll Deflection State"] = "Alert"
 
     else:
         labelValue = ("Normal")
@@ -103,12 +131,17 @@ def CheckRollDeflectionConditions(self, aileronDeflection, rollRate):
         self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
         self.pushButton_rollDeflection.setText("Normal")
 
-# ====================================================================================================================== Check Yaw Conditions()
-def CheckYawDeflectionConditions(self, rudderDeflection, yawRate):
+        dataHandler.finalDataToLog["Roll Deflection State"] = "Normal"
 
-    # --------------------------------------------------------------------------------------------- Warning condition.
+# ====================================================================================================================== Check Yaw Conditions()
+def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):
+
     warningCondition = 1.1 * ((0.2654 * rudderDeflection) + 0.8041)
     alertCondition = 1.2 * ((0.2654 * rudderDeflection) + 0.8041)
+
+    # Set warning and alert conditions to data to write to output log
+    dataHandler.finalDataToLog["Yaw Rate Warning Condition[deg]"] = warningCondition
+    dataHandler.finalDataToLog["Yaw Rate Alert Condition[deg]"] = warningCondition
 
     if (yawRate <= warningCondition):
 
@@ -116,11 +149,15 @@ def CheckYawDeflectionConditions(self, rudderDeflection, yawRate):
         self.pushButton_yawDeflection.setStyleSheet('QPushButton {background-color: red;}')
         self.pushButton_yawDeflection.setText("Warning")
 
+        dataHandler.finalDataToLog["Yaw Deflection State"] = "Warning"
+
     elif (yawRate <= alertCondition):
 
         self.label_yawDeflectionValue.setText("{:.3f}".format(alertCondition))
         self.pushButton_yawDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
         self.pushButton_yawDeflection.setText("Alert")
+
+        dataHandler.finalDataToLog["Yaw Deflection State"] = "Alert"
 
     else:
         labelValue = ("Normal")
@@ -128,7 +165,7 @@ def CheckYawDeflectionConditions(self, rudderDeflection, yawRate):
         self.pushButton_yawDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
         self.pushButton_yawDeflection.setText("Normal")
 
-    # self.paramsToLog = [self.telemetry_data["<Clock>[ms]"], self.Surface6, self.pitch_y, self.Surface0, self.roll_y, self.Surface3, self.yaw_y]
+        dataHandler.finalDataToLog["Yaw Deflection State"] = "Normal"
 
     # Check if user opened a log file. If so, write to log.
     # if (self.logCreated == 1):

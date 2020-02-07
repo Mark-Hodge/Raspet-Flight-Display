@@ -1,11 +1,28 @@
 # import cls as cls     # TODO: remove later if not needed
+import csv
+
 
 class DataHandler:
 
     def __init__(self):
+
+        # Keeps track of the start, end, and elapsed time
+        self.lockStartTime = False
+        self.timeStartClicked = 0
+        self.startTime = 0
+        self.elapsedTime = 0
+
+        # Holds the file descriptor of the PCC telemetry file that data is being retrieved from.
         self.telemetryFile = ""
+
+        # Holds the file descriptor of the output log file that RFD is writing to.
+        self.outputLogFile = ""
+
+        # Dictionary that holds the keys and values of limits the user manually defines (not always used).
         self.manuallyDefinedLimits = {"elevatorPositionLimit": 0.0, "aileronPositionLimit": 0.0, "rudderPositionLimit": 0.0,
                                      "pitchRateLimit": 0.0, "rollRateLimit": 0.0, "yawRateLimit": 0.0}
+
+        # Dictionary holds the keys and values of the entire data set from PCC (200 values per iteration).
         self.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],
     '<Height>[m]': [],'<VNorth>[m/s]': [],'<VEast>[m/s]': [],'<VDown>[m/s]': [],'<GroundSpeed>[m/s]': [],'<Direction>[rad]': [],'<Status>': [],
     '<NumSats>': [],'<VisibleSats>': [],'<PDOP>': [],'<InputV>[V]': [],'<InputC>[A]': [],'<ServoV>[V]': [],'<ServoC>[A]': [],
@@ -36,13 +53,39 @@ class DataHandler:
     '<ResidualPosNorth>[m]': [],'<ResidualPosEast>[m]': [],'<ResidualPosDown>[m]': [],'<ResidualVelNorth>[m/s]': [],'<ResidualVelEast>[m/s]': [],
     '<ResidualVelDown>[m/s]': []
     }
+
+        # Data segment is a temporary array that holds the entire data set from PCC until the set is verified to be complete and not corrupt.
         self.rawDataSegment = []
 
+        # Holds the final set of desired data after all integrity checks, calculations, and updates to the GUI have been made.
+        self.finalDataToLog = {"Flag": None, "Clock[ms]": None, "Elevator Deflection[deg]": None, "Pitch Rate[deg/s]": None, "Aileron Deflection[deg]": None,
+                               "Roll Rate[deg/s]": None, "Rudder Deflection[deg]": None, "Yaw Rate[deg/s]": None, "Pitch Rate Warning Condition[deg]": None, "Pitch Rate Alert Condition[deg]": None,
+                               "Roll Rate Warning Condition[deg]": None, "Roll Rate Alert Condition[deg]": None, "Yaw Rate Warning Condition[deg]": None, "Yaw Rate Alert Condition[deg]": None,
+                               "Pitch Deflection State": None, "Roll Deflection State": None, "Yaw Deflection State": None}
+
+        # Holds the fieldnames for the .csv output log file
+        self.fieldnames = ["Flag", "Clock[ms]", "Elevator Deflection[deg]", "Pitch Rate[deg/s]", "Aileron Deflection[deg]",
+                               "Roll Rate[deg/s]", "Rudder Deflection[deg]", "Yaw Rate[deg/s]", "Pitch Rate Warning Condition[deg]", "Pitch Rate Alert Condition[deg]",
+                               "Roll Rate Warning Condition[deg]", "Roll Rate Alert Condition[deg]", "Yaw Rate Warning Condition[deg]", "Yaw Rate Alert Condition[deg]",
+                               "Pitch Deflection State", "Roll Deflection State", "Yaw Deflection State"]
+
+        # Holds the dictionary writer containing the file descriptor and fieldnames for output log file
+        self.writer = ""
+
+        # Boolean value tracks the state of the flag button
+        self.flagState = False
 
     @classmethod
     def setManuallyDefinedLimts(self, data):
         self.manuallyDefinedLimits = data
         print(data, self.manuallyDefinedLimits)
+
+    def setWriter(self):
+        self.Writer = csv.DictWriter(self.outputLogFile[0], fieldnames=self.fieldnames)
+        self.Writer.writeheader()
+
+    def getFlagState(self):
+        return self.flagState
 
     def setDataSegment(self, dataSegment):
         self.rawDataSegment = dataSegment
@@ -56,6 +99,13 @@ class DataHandler:
 
     def getTelemetryFile(self):
         return self.telemetryFile
+
+    def setOutputLogFile(self, outputLogFile):
+        self.outputLogFile = outputLogFile
+        print(self.outputLogFile) # TODO: Debugging purposes only
+
+    def getOutputLogFile(self):
+        return self.outputLogFile
 
     def resetRawTelemetryData(self):
         self.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],

@@ -1,11 +1,35 @@
 
-# import os   # TODO: remove later if not needed
+import os   # TODO: remove later if not needed
 from dataTransformer import PopulateDictionary
 from PyQt5.QtWidgets import QFileDialog
 # from dataHandler import DataHandler   # TODO: remove later if not needed
 
+# ====================================================================================================================== Open Output Log File()
+def FileHandler_OpenOutputLogFile(self, dataHandlerInstance):
 
-# ====================================================================================================================== Open File()
+    # Call file navigator on mouse click and attempt to open/create file.
+    try:
+        outputLogFile = QFileDialog.getOpenFileName()
+
+    except Exception as ex:
+        print("Could not open output log file (check file type and try again).", ex)
+
+    # Open or create file and move cursor to EOF.
+    try:
+        fh = open(outputLogFile[0], 'w')
+        fh.seek(0, os.SEEK_END)
+
+        # Set GUI label to file path
+        self.label_infoBar_output.setText("Output Log: " + str(outputLogFile[0]))
+
+        # Store file descriptor in DataHandler
+        dataHandlerInstance.setOutputLogFile(fh)
+        dataHandlerInstance.setWriter()
+
+    except Exception as ex:
+        print("Could not open/create file and/or move cursor to EOF: ERROR --> ", ex)
+
+# ====================================================================================================================== Open PCC Telemetry File()
 def openFile(self, dataHandlerInstance):
 
     # Call file navigator on mouse click and display path on screen
@@ -18,19 +42,43 @@ def openFile(self, dataHandlerInstance):
     # Open file and move cursor to EOF
     try:
         fh = open(PCCTelemetryFile[0], 'r')
-        # fh.seek(0, os.SEEK_END)   TODO: Uncomment for production version. Ignored for testing purposes while not working with live telemetry
-        print("File Successfully Opened and cursor moved to EOF")       # TODO: DEBUGGING PURPOSES ONLY (delete print statement later)
+        # fh.seek(0, os.SEEK_END)   # TODO: Uncomment for production version. Ignored for testing purposes while not working with live telemetry
+
+        # Set GUI label to file path
         self.label_toolBar_PCCFile.setText("PCC Telemetry File: " + str(PCCTelemetryFile[0]))
 
-        # Store file path in DataHandler encase restart or failure, file path can be retrieved and re-opened.
+        # Store file descriptor in DataHandler
         dataHandlerInstance.setTelemetryFile(fh)
         dataHandlerInstance.resetRawTelemetryData()
 
+        print("File Successfully Opened and cursor moved to EOF")  # TODO: DEBUGGING PURPOSES ONLY (delete print statement later)
 
     # Hand errors in opening or navigating to EOF
     except Exception as ex:
-        print("Could not open file: ERROR --> ", ex)
+        print("Could not open/create file and/or move cursor to EOF: ERROR --> ", ex)
 
+# ====================================================================================================================== Write To Log()
+def writeToLogFile(dataHandlerInstance):
+
+    if (dataHandlerInstance.getFlagState()):
+        dataHandlerInstance.writer.writerow({"Flag": "1", "Clock[ms]": dataHandlerInstance.finalDataToLog["Clock[ms]"], "Elevator Deflection[deg]": dataHandlerInstance.finalDataToLog["Elevator Deflection[deg]"],
+                                             "Pitch Rate[deg/s]": dataHandlerInstance.finalDataToLog["Pitch Rate[deg/s]"], "Aileron Deflection[deg]": dataHandlerInstance.finalDataToLog["Aileron Deflection[deg]"],
+                                             "Roll Rate[deg/s]": dataHandlerInstance.finalDataToLog["Roll Rate[deg/s]"], "Rudder Deflection[deg]": dataHandlerInstance.finalDataToLog["Rudder Deflection[deg]"],
+                                             "Yaw Rate[deg/s]": dataHandlerInstance.finalDataToLog["Yaw Rate[deg/s]"], "Pitch Rate Warning Condition": dataHandlerInstance.finalDataToLog["Pitch Rate Warning Condition"],
+                                             "Pitch Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Pitch Rate Alert Condition[deg]"], "Roll Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Warning Condition[deg]"],
+                                             "Roll Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Alert Condition[deg]"], "Yaw Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Warning Condition[deg]"],
+                                             "Yaw Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Alert Condition[deg]"], "Pitch Deflection State": dataHandlerInstance.finalDataToLog["Pitch Deflection State"],
+                                             "Roll Deflection State": dataHandlerInstance.finalDataToLog["Roll Deflection State"], "Yaw Deflection State": dataHandlerInstance.finalDataToLog["Yaw Deflection State"]})
+
+    else:
+        dataHandlerInstance.writer.writerow({"Flag": "0", "Clock[ms]": dataHandlerInstance.finalDataToLog["Clock[ms]"], "Elevator Deflection[deg]": dataHandlerInstance.finalDataToLog["Elevator Deflection[deg]"],
+                                             "Pitch Rate[deg/s]": dataHandlerInstance.finalDataToLog["Pitch Rate[deg/s]"], "Aileron Deflection[deg]": dataHandlerInstance.finalDataToLog["Aileron Deflection[deg]"],
+                                             "Roll Rate[deg/s]": dataHandlerInstance.finalDataToLog["Roll Rate[deg/s]"], "Rudder Deflection[deg]": dataHandlerInstance.finalDataToLog["Rudder Deflection[deg]"],
+                                             "Yaw Rate[deg/s]": dataHandlerInstance.finalDataToLog["Yaw Rate[deg/s]"], "Pitch Rate Warning Condition": dataHandlerInstance.finalDataToLog["Pitch Rate Warning Condition"],
+                                             "Pitch Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Pitch Rate Alert Condition[deg]"], "Roll Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Warning Condition[deg]"],
+                                             "Roll Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Roll Rate Alert Condition[deg]"], "Yaw Rate Warning Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Warning Condition[deg]"],
+                                             "Yaw Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Alert Condition[deg]"], "Pitch Deflection State": dataHandlerInstance.finalDataToLog["Pitch Deflection State"],
+                                             "Roll Deflection State": dataHandlerInstance.finalDataToLog["Roll Deflection State"], "Yaw Deflection State": dataHandlerInstance.finalDataToLog["Yaw Deflection State"]})
 
 # ====================================================================================================================== Retrive PCC Log()
 def retrievePCCLog(dataHandler):

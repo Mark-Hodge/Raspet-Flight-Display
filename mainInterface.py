@@ -534,7 +534,10 @@ class Ui_MainWindow(object):
         self.actionOff.triggered['bool'].connect(self.actionOn.toggle)
         self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
         self.actionOpen_PCC_Telemetry_File.triggered.connect(self.connector_openPCCTelemetryFile)
+        self.actionOpen_Existing_Output_Log.triggered.connect(self.connector_openOutputLogFile)
+        self.actionNew_Output_Log_File.triggered.connect(self.connector_openOutputLogFile)
         self.actionDefine_Manual_Limts.triggered.connect(self.connector_openLimitsDialog)
+        self.pushButton_tooBar_flag.clicked.connect(self.connector_flagClicked)
         self.pushButton_toolBar_start.clicked.connect(self.connector_startTracking)
         self.pushButton_toolBar_stop.clicked.connect(self.connector_stopTracking)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -591,8 +594,19 @@ class Ui_MainWindow(object):
         self.actionOn.setText(_translate("MainWindow", "On"))
         self.actionOff.setText(_translate("MainWindow", "Off"))
 
+    def connector_flagClicked(self):
+
+        if (self.pushButton_tooBar_flag.isChecked()):
+            flagIsSet(self)
+
+        else:
+            flagIsNotSet(self)
+
     def connector_startTracking(self):
         # Pass start value set as 1 (True) to start tracking telemetry #Fixme: change this later
+        # startTime = datetime.datetime.now()
+        # self.label_infoBar_startTime.setText(startTime.strftime("Start Time: %H:%M:%S"))
+
         self.trackCondition = 1
         while (self.trackCondition):
             startTracking(self)
@@ -605,6 +619,9 @@ class Ui_MainWindow(object):
 
     def connector_openPCCTelemetryFile(self):
         openPCCTelemetryFile(self)
+
+    def connector_openOutputLogFile(self):
+        Driver_openOutputLogFile(self)
 
     def connector_openLimitsDialog(self):
         openLimitsDialog(self)
