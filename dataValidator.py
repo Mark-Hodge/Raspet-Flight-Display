@@ -67,8 +67,8 @@ def UpdateHUD(self, dataHandler):
 # ====================================================================================================================== Check Pitch Conditions()
 def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHandler):
 
-    warningCondition = 1.1 * ((2.0761 * elevatorDeflection) + 7.3747)
-    alertCondition   = 1.2 * ((2.0761 * elevatorDeflection) + 7.3747)
+    warningCondition = 1.1 * ((2.0761 * elevatorDeflection) + 5.2714)
+    alertCondition   = 1.2 * ((2.0761 * elevatorDeflection) + 5.2714)
 
     # Set warning and alert conditions to data to write to output log
     dataHandler.finalDataToLog["Pitch Rate Warning Condition[deg]"] = warningCondition
@@ -103,7 +103,7 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
 def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler):
 
     warningCondition = 1.1 * ((2.8471 * aileronDeflection) + 1.5321)
-    alertCondition = 1.2 * ((2.8471 * aileronDeflection) + 1.5321)
+    alertCondition   = 1.2 * ((2.8471 * aileronDeflection) + 1.5321)
 
     # Set warning and alert conditions to data to write to output log
     dataHandler.finalDataToLog["Roll Rate Warning Condition[deg]"] = warningCondition
@@ -137,7 +137,7 @@ def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler
 def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):
 
     warningCondition = 1.1 * ((0.2654 * rudderDeflection) + 0.8041)
-    alertCondition = 1.2 * ((0.2654 * rudderDeflection) + 0.8041)
+    alertCondition   = 1.2 * ((0.2654 * rudderDeflection) + 0.8041)
 
     # Set warning and alert conditions to data to write to output log
     dataHandler.finalDataToLog["Yaw Rate Warning Condition[deg]"] = warningCondition
