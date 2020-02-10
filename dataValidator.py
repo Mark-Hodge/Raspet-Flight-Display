@@ -84,7 +84,7 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
 
     elif (pitchRate <= alertCondition):
 
-        self.label_pitchDeflectionValue.setText("{:.3f}".format(alertCondition))
+        self.label_pitchDeflectionValue.setText("Warning: {:.3f}".format(alertCondition), "\nAlert: {:.3f}".format(alertCondition))
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
         self.pushButton_pitchDeflection.setText("Alert")
 
@@ -102,36 +102,88 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
 # ====================================================================================================================== Check Roll Conditions()
 def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler):
 
-    warningCondition = 1.1 * ((2.8471 * aileronDeflection) + 1.5321)
-    alertCondition   = 1.2 * ((2.8471 * aileronDeflection) + 1.5321)
+    # Calculate the upper bound of the warning and alert conditions. Take the absolute value
+    upperWarningCondition = abs(1.1 * ((2.8471 * aileronDeflection) + 1.5321))
+    upperAlertCondition   = abs(1.2 * ((2.8471 * aileronDeflection) + 1.5321))
+
+    # Calculate the lower bound of the warning and alert conditions. Take the negative of the absolute value
+    lowerWarningCondition = -abs(1.1 * ((2.8471 * aileronDeflection) + 1.5321))
+    lowerAlertCondition   = -abs(1.2 * ((2.8471 * aileronDeflection) + 1.5321))
+
+    # TODO: Debugging purposes, remove from production release
+    print("\nRoll Rate\t\tAileron Deflection\t\tWarning Condition\t\tAlert Condition")
+    print(str(rollRate) + "\t" + str(aileronDeflection) + "\t" + str(upperWarningCondition) + "\t" + str(upperAlertCondition) + "\n")
+    print(str(rollRate) + "\t" + str(aileronDeflection) + "\t" + str(lowerWarningCondition) + "\t" + str(lowerAlertCondition) + "\n")
+    #   END TODO ^
 
     # Set warning and alert conditions to data to write to output log
-    dataHandler.finalDataToLog["Roll Rate Warning Condition[deg]"] = warningCondition
-    dataHandler.finalDataToLog["Roll Rate Alert Condition[deg]"] = warningCondition
+    dataHandler.finalDataToLog["Roll Rate Warning Condition[deg]"] = upperAlertCondition
+    dataHandler.finalDataToLog["Roll Rate Alert Condition[deg]"] = lowerAlertCondition
 
-    if (rollRate <= warningCondition):
+    # If roll rate is in the negative direction, evaluate using the lower bound conditions
+    if (rollRate < 0):
 
-        self.label_rollDeflectionValue.setText("{:.3f}".format(warningCondition))
-        self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: red;}')
-        self.pushButton_rollDeflection.setText("Warning")
+        labelValue = ("Warning: " + "{:.9f}".format(lowerWarningCondition) + "\nAlert: " + "{:.9f}".format(
+            lowerAlertCondition))
 
-        dataHandler.finalDataToLog["Roll Deflection State"] = "Warning"
+        if ((rollRate <= lowerWarningCondition) and (rollRate > lowerAlertCondition)):
 
-    elif (rollRate <= alertCondition):
+            self.label_rollDeflectionValue.setText(labelValue)
+            # self.label_rollDeflectionValue.setText("{:.3f}".format(warningCondition))
+            self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
+            self.pushButton_rollDeflection.setText("Warning")
 
-        self.label_rollDeflectionValue.setText("{:.3f}".format(alertCondition))
-        self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
-        self.pushButton_rollDeflection.setText("Alert")
+            dataHandler.finalDataToLog["Roll Deflection State"] = "Warning"
 
-        dataHandler.finalDataToLog["Roll Deflection State"] = "Alert"
+        if (rollRate <= lowerAlertCondition):
 
+            self.label_rollDeflectionValue.setText(labelValue)
+            # self.label_rollDeflectionValue.setText("{:.3f}".format(alertCondition))
+            self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: red;}')
+            self.pushButton_rollDeflection.setText("Alert")
+
+            dataHandler.finalDataToLog["Roll Deflection State"] = "Alert"
+
+        else:
+
+            self.label_rollDeflectionValue.setText(labelValue)
+            self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
+            self.pushButton_rollDeflection.setText("Normal")
+
+            dataHandler.finalDataToLog["Roll Deflection State"] = "Normal"
+
+    # If roll rate is in the positive direction, evaluate using the upper bound conditions
     else:
-        labelValue = ("Normal")
-        self.label_rollDeflectionValue.setText(labelValue)
-        self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
-        self.pushButton_rollDeflection.setText("Normal")
 
-        dataHandler.finalDataToLog["Roll Deflection State"] = "Normal"
+        labelValue = ("Warning: " + "{:.9f}".format(upperWarningCondition) + "\nAlert: " + "{:.9f}".format(
+            upperAlertCondition))
+
+        if (rollRate <= upperWarningCondition):
+
+            self.label_rollDeflectionValue.setText(labelValue)
+            # self.label_rollDeflectionValue.setText("{:.3f}".format(warningCondition))
+            self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: red;}')
+            self.pushButton_rollDeflection.setText("Warning")
+
+            dataHandler.finalDataToLog["Roll Deflection State"] = "Warning"
+
+        elif (rollRate <= upperAlertCondition):
+
+            self.label_rollDeflectionValue.setText(labelValue)
+            # self.label_rollDeflectionValue.setText("{:.3f}".format(alertCondition))
+            self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
+            self.pushButton_rollDeflection.setText("Alert")
+
+            dataHandler.finalDataToLog["Roll Deflection State"] = "Alert"
+
+        else:
+
+            self.label_rollDeflectionValue.setText(labelValue)
+            self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
+            self.pushButton_rollDeflection.setText("Normal")
+
+            dataHandler.finalDataToLog["Roll Deflection State"] = "Normal"
+
 
 # ====================================================================================================================== Check Yaw Conditions()
 def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):

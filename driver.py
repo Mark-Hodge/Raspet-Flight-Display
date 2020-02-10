@@ -9,13 +9,13 @@ from mainInterface import *
 
 DataHandler = DataHandler()
 
-def openLimitsDialog(self):
-    import sys
-    Dialog = QtWidgets.QDialog()
-    ui = Form()
-    ui.setupUi(Dialog)
-    Dialog.exec()
-    # sys.exit(app.exec_())
+# def openLimitsDialog(self):
+#     import sys
+#     Dialog = QtWidgets.QDialog()
+#     ui = Form()
+#     ui.setupUi(Dialog)
+#     Dialog.exec()
+#     # sys.exit(app.exec_())
 
 def openPCCTelemetryFile(self):
     try:

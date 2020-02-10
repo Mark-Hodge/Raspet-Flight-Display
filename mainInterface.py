@@ -489,11 +489,13 @@ class Ui_MainWindow(object):
         self.menuFile.setObjectName("menuFile")
         self.menuLog = QtWidgets.QMenu(self.menubar)
         self.menuLog.setObjectName("menuLog")
-        self.menuLimits = QtWidgets.QMenu(self.menubar)
-        self.menuLimits.setObjectName("menuLimits")
-        self.menuTrack_Position_Rate_Limits = QtWidgets.QMenu(self.menuLimits)
-        self.menuTrack_Position_Rate_Limits.setObjectName("menuTrack_Position_Rate_Limits")
+
+        # self.menuLimits = QtWidgets.QMenu(self.menubar)
+        # self.menuLimits.setObjectName("menuLimits")
+        # self.menuTrack_Position_Rate_Limits = QtWidgets.QMenu(self.menuLimits)
+        # self.menuTrack_Position_Rate_Limits.setObjectName("menuTrack_Position_Rate_Limits")
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -505,38 +507,47 @@ class Ui_MainWindow(object):
         self.actionOpen_Existing_Output_Log.setObjectName("actionOpen_Existing_Output_Log")
         self.actionNew_Output_Log_File = QtWidgets.QAction(MainWindow)
         self.actionNew_Output_Log_File.setObjectName("actionNew_Output_Log_File")
-        self.actionDefine_Manual_Limts = QtWidgets.QAction(MainWindow)
-        self.actionDefine_Manual_Limts.setObjectName("actionDefine_Manual_Limts")
-        self.actionOn = QtWidgets.QAction(MainWindow)
-        self.actionOn.setCheckable(True)
-        self.actionOn.setObjectName("actionOn")
-        self.actionOff = QtWidgets.QAction(MainWindow)
-        self.actionOff.setCheckable(True)
-        self.actionOff.setChecked(True)
-        self.actionOff.setObjectName("actionOff")
+
+        # self.actionDefine_Manual_Limts = QtWidgets.QAction(MainWindow)
+        # self.actionDefine_Manual_Limts.setObjectName("actionDefine_Manual_Limts")
+        # self.actionOn = QtWidgets.QAction(MainWindow)
+        # self.actionOn.setCheckable(True)
+        # self.actionOn.setObjectName("actionOn")
+        # self.actionOff = QtWidgets.QAction(MainWindow)
+        # self.actionOff.setCheckable(True)
+        # self.actionOff.setChecked(True)
+        # self.actionOff.setObjectName("actionOff")
+
         self.menuFile.addAction(self.actionOpen_PCC_Telemetry_File)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuLog.addAction(self.actionOpen_Existing_Output_Log)
         self.menuLog.addAction(self.actionNew_Output_Log_File)
-        self.menuTrack_Position_Rate_Limits.addAction(self.actionOn)
-        self.menuTrack_Position_Rate_Limits.addAction(self.actionOff)
-        self.menuLimits.addAction(self.actionDefine_Manual_Limts)
-        self.menuLimits.addAction(self.menuTrack_Position_Rate_Limits.menuAction())
+
+        # self.menuTrack_Position_Rate_Limits.addAction(self.actionOn)
+        # self.menuTrack_Position_Rate_Limits.addAction(self.actionOff)
+        # self.menuLimits.addAction(self.actionDefine_Manual_Limts)
+        # self.menuLimits.addAction(self.menuTrack_Position_Rate_Limits.menuAction())
+
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuLog.menuAction())
-        self.menubar.addAction(self.menuLimits.menuAction())
+
+        # self.menubar.addAction(self.menuLimits.menuAction())
 
         # Button / Action Connectors
         self.retranslateUi(MainWindow)
         # self.pushButton_toolBar_stop.clicked.connect(MainWindow.close)
         self.actionExit.triggered.connect(MainWindow.close)
-        self.actionOff.triggered['bool'].connect(self.actionOn.toggle)
-        self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
+
+        # self.actionOff.triggered['bool'].connect(self.actionOn.toggle)
+        # self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
+
         self.actionOpen_PCC_Telemetry_File.triggered.connect(self.connector_openPCCTelemetryFile)
         self.actionOpen_Existing_Output_Log.triggered.connect(self.connector_openOutputLogFile)
         self.actionNew_Output_Log_File.triggered.connect(self.connector_openOutputLogFile)
-        self.actionDefine_Manual_Limts.triggered.connect(self.connector_openLimitsDialog)
+
+        # self.actionDefine_Manual_Limts.triggered.connect(self.connector_openLimitsDialog)
+
         self.pushButton_tooBar_flag.clicked.connect(self.connector_flagClicked)
         self.pushButton_toolBar_start.clicked.connect(self.connector_startTracking)
         self.pushButton_toolBar_stop.clicked.connect(self.connector_stopTracking)
@@ -584,15 +595,18 @@ class Ui_MainWindow(object):
         self.pushButton_toolBar_stop.setText(_translate("MainWindow", "Stop"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuLog.setTitle(_translate("MainWindow", "Log"))
-        self.menuLimits.setTitle(_translate("MainWindow", "Limits"))
-        self.menuTrack_Position_Rate_Limits.setTitle(_translate("MainWindow", "Track Manual Limits"))
+
+        # self.menuLimits.setTitle(_translate("MainWindow", "Limits"))
+        # self.menuTrack_Position_Rate_Limits.setTitle(_translate("MainWindow", "Track Manual Limits"))
+
         self.actionOpen_PCC_Telemetry_File.setText(_translate("MainWindow", "Open PCC Telemetry File..."))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
         self.actionOpen_Existing_Output_Log.setText(_translate("MainWindow", "Open Existing Output Log File..."))
         self.actionNew_Output_Log_File.setText(_translate("MainWindow", "New Output Log File"))
-        self.actionDefine_Manual_Limts.setText(_translate("MainWindow", "Manually Define Limts"))
-        self.actionOn.setText(_translate("MainWindow", "On"))
-        self.actionOff.setText(_translate("MainWindow", "Off"))
+
+        # self.actionDefine_Manual_Limts.setText(_translate("MainWindow", "Manually Define Limts"))
+        # self.actionOn.setText(_translate("MainWindow", "On"))
+        # self.actionOff.setText(_translate("MainWindow", "Off"))
 
     def connector_flagClicked(self):
 

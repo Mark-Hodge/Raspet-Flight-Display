@@ -140,9 +140,9 @@ class DataHandler:
     }
 
     def setRawTelemetryData(self, newTelemetryDictionary):
-        print("OLD: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
+        # print("OLD: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
         self.rawTelemetryData = newTelemetryDictionary
-        print("NEW: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
+        # print("NEW: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
 
     def getRawTelemetryData(self):
         return self.rawTelemetryData
