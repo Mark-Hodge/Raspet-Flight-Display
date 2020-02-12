@@ -1,6 +1,4 @@
-# from dataHandler import DataHandler   #TODO: Remove if not needed
 import copy
-from dataValidator import *
 
 def PopulateDictionary(dataHandler):
     position = 0        # Initialize for index tracking
@@ -59,8 +57,6 @@ def PopulateDictionary(dataHandler):
 
     else:
         # If integrity check passes, push dictionary for values to be used in updating display
-        # print(newTelemetryDict)   #TODO: Debugging purposes only
         dataHandler.setRawTelemetryData(newTelemetryDict)
-        # print(dataHandler.getRawTelemetryData())    # TODO: Debugging purposes only
 
         return 1

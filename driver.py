@@ -1,21 +1,12 @@
 from PyQt5.QtCore import QThreadPool, QRunnable, pyqtSlot
-
-from dataTransformer import PopulateDictionary
 from limitsdialog import Ui_Dialog as Form, Ui_Dialog
-from pccFileHandler import retrievePCCLog, openFile, FileHandler_OpenOutputLogFile, writeToLogFile
+from dataTransformer import *
+from pccFileHandler import *
 from dataHandler import DataHandler
 from dataValidator import *
 from mainInterface import *
 
 DataHandler = DataHandler()
-
-# def openLimitsDialog(self):
-#     import sys
-#     Dialog = QtWidgets.QDialog()
-#     ui = Form()
-#     ui.setupUi(Dialog)
-#     Dialog.exec()
-#     # sys.exit(app.exec_())
 
 def openPCCTelemetryFile(self):
     try:
@@ -42,12 +33,6 @@ def startTracking(self):
     Under Construction
     Further implementation needed later on
     """
-    # pushButton_toolBar_start = self.pushButton_toolBar_start
-    """
-    # TODO: re-write this section, this is for testing one iteration of the programs function calls.
-    # Will need to implement continuous iteration, exception handling, and interface updating.
-    # As well as validation for each new set of telemetry data and checking against limit conditions
-    """
     try:
         if (DataHandler.lockStartTime == False):
             DataHandler.timeStartClicked = datetime.datetime.now()
@@ -68,15 +53,20 @@ def startTracking(self):
         UpdateHUD(self, DataHandler)
         writeToLogFile(DataHandler)
 
+        # Get elapsed time and PCC time
         DataHandler.elapsedTime = (time.time() - DataHandler.startTime)
+        PCCTime = DataHandler.getRawTelemetryData()
+        PCCTime = PCCTime["<Clock>[ms]"]
+
+        # Update GUI labels to elapsed time and PCC time
         self.label_infoBar_elapsedTime.setText(time.strftime("Elapsed Time: %H:%M:%S", time.gmtime(DataHandler.elapsedTime)))
+        self.label_infoBar_PCCTime.setText("PCC Time: " + str(PCCTime))
+
         return 1
 
     except Exception as ex:
         print("Caught exception here, ", ex)
         return 1
-
-
 
 def stopTracking(self):
     self.trackCondition = 0

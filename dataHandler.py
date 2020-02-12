@@ -1,6 +1,4 @@
-# import cls as cls     # TODO: remove later if not needed
 import csv
-
 
 class DataHandler:
 
@@ -19,8 +17,8 @@ class DataHandler:
         self.outputLogFile = ""
 
         # Dictionary that holds the keys and values of limits the user manually defines (not always used).
-        self.manuallyDefinedLimits = {"elevatorPositionLimit": 0.0, "aileronPositionLimit": 0.0, "rudderPositionLimit": 0.0,
-                                     "pitchRateLimit": 0.0, "rollRateLimit": 0.0, "yawRateLimit": 0.0}
+        # self.manuallyDefinedLimits = {"elevatorPositionLimit": 0.0, "aileronPositionLimit": 0.0, "rudderPositionLimit": 0.0,
+        #                              "pitchRateLimit": 0.0, "rollRateLimit": 0.0, "yawRateLimit": 0.0}
 
         # Dictionary holds the keys and values of the entire data set from PCC (200 values per iteration).
         self.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],
@@ -75,14 +73,17 @@ class DataHandler:
         # Boolean value tracks the state of the flag button
         self.flagState = False
 
-    @classmethod
-    def setManuallyDefinedLimts(self, data):
-        self.manuallyDefinedLimits = data
-        print(data, self.manuallyDefinedLimits)
+    # @classmethod
+    # def setManuallyDefinedLimts(self, data):
+    #     self.manuallyDefinedLimits = data
+    #     print(data, self.manuallyDefinedLimits)
 
     def setWriter(self):
         self.writer = csv.DictWriter(self.outputLogFile, fieldnames=self.fieldnames)
         self.writer.writeheader()
+
+    def getWriter(self):
+        return self.writer
 
     def getFlagState(self):
         return self.flagState
