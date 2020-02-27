@@ -73,8 +73,8 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
     absoluteDeflection = abs(elevatorDeflection)
 
     # Calculate the upper bound of the warning and alert conditions. Take the absolute value
-    warningCondition = abs(1.1 * ((2.0761 * elevatorDeflection) + 0.52714))
-    alertCondition = abs(1.2 * ((2.0761 * elevatorDeflection) + 0.52714))
+    warningCondition = abs(1.1 * ((2.0761 * absoluteDeflection) + 5.2714))
+    alertCondition = abs(1.2 * ((2.0761 * absoluteDeflection) + 5.2714))
 
     # TODO: Debugging purposes, remove from production release
     print("\nPitch Rate\t\tElevator Deflection\t\tWarning Condition\t\tAlert Condition")
@@ -101,7 +101,7 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
         dataHandler.finalDataToLog["Pitch Deflection State"] = "Warning"
 
     # Evaluate absolute value of rate between the alert condition and warning condition
-    elif (absoluteRate <= alertCondition) and (absoluteRate> warningCondition):
+    elif (absoluteRate <= alertCondition) and (absoluteRate > warningCondition):
 
         # Change and update the text and color of the labels/buttons
         self.label_pitchDeflectionValue.setText(labelValue)
@@ -213,7 +213,7 @@ def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):
         dataHandler.finalDataToLog["Yaw Deflection State"] = "Warning"
 
     # Evaluate absolute value of rate between the alert condition and warning condition
-    elif (absoluteRate <= alertCondition) and (absoluteRate> warningCondition):
+    elif (absoluteRate <= alertCondition) and (absoluteRate > warningCondition):
 
         # Change and update the text and color of the labels/buttons
         self.label_yawDeflectionValue.setText(labelValue)

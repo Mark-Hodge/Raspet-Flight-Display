@@ -617,6 +617,8 @@ class Ui_MainWindow(object):
         else:
             flagIsNotSet(self)
 
+        QApplication.processEvents()
+
     def connector_startTracking(self):
         # Pass start value set as 1 (True) to start tracking telemetry #Fixme: change this later
         # startTime = datetime.datetime.now()
