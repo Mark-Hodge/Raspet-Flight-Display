@@ -1,3 +1,9 @@
+"""
+Version Information
+    [2.0.0] - 2020-04-07 10:19:17 CST
+Raspet Flight Display
+   https://github.com/Mark-Hodge/Raspet-Flight-Display
+"""
 from PyQt5.QtCore import QThreadPool, QRunnable, pyqtSlot
 from limitsdialog import Ui_Dialog as Form, Ui_Dialog
 from dataTransformer import *
