@@ -1,7 +1,7 @@
 # Changelog
 All changes to this project will be documented in this file.
 - Project Conception: 2019-05-09
-- First Full Release: 2019-07-09  [Version 0.0.1]
+- First Full Release: 2019-07-09  [Version 1.0.0]
 - Second Full Release: 2019-04-07 [Version 2.0.1]
 - Updates Since First Release: 4
 
