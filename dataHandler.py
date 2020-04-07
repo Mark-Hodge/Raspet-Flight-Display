@@ -74,40 +74,50 @@ class DataHandler:
         self.flagState = False
 
     # @classmethod
-    # def setManuallyDefinedLimts(self, data):
+    # def setManuallyDefinedLimits(self, data):
     #     self.manuallyDefinedLimits = data
     #     print(data, self.manuallyDefinedLimits)
 
+    # Updates the csv writer instance used for writing output to the log file and writes the header row
     def setWriter(self):
         self.writer = csv.DictWriter(self.outputLogFile, fieldnames=self.fieldnames)
         self.writer.writeheader()
 
+    # Returns the csv writer
     def getWriter(self):
         return self.writer
 
+    # Returns the state that the output log flag is currently set to
     def getFlagState(self):
         return self.flagState
 
+    # Store the argument in the rawDataSegment object of the DataHandler instance
     def setDataSegment(self, dataSegment):
         self.rawDataSegment = dataSegment
 
+    # Return the rawDataSegment
     def getDataSegment(self):
         return self.rawDataSegment
 
+    # Store the argument in the telemetryFile object of the DataHandler instance
     def setTelemetryFile(self, telemetryFile):
         self.telemetryFile = telemetryFile
         print(self.telemetryFile) # TODO: Delete after debugging
 
+    # Return the telemetryFile
     def getTelemetryFile(self):
         return self.telemetryFile
 
+    # Store the argument in the outputLogFile object of the DataHandler instance
     def setOutputLogFile(self, outputLogFile):
         self.outputLogFile = outputLogFile
         print(self.outputLogFile) # TODO: Debugging purposes only
 
+    # Return the outPutLogFile
     def getOutputLogFile(self):
         return self.outputLogFile
 
+    # Clear then reset the dictionary with key and empty values
     def resetRawTelemetryData(self):
         self.rawTelemetryData = {'<Clock>[ms]': [],'<Year>': [],'<Month>': [],'<Day>': [],'<Hours>': [],'<Minutes>': [],'<Seconds>': [],'<Lat>[rad]': [],'<Lon>[rad]': [],
     '<Height>[m]': [],'<VNorth>[m/s]': [],'<VEast>[m/s]': [],'<VDown>[m/s]': [],'<GroundSpeed>[m/s]': [],'<Direction>[rad]': [],'<Status>': [],
@@ -140,11 +150,13 @@ class DataHandler:
     '<ResidualVelDown>[m/s]': []
     }
 
+    # Store the argument in the rawTelemetryDictionary object of the DataHandler instance
     def setRawTelemetryData(self, newTelemetryDictionary):
         # print("OLD: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
         self.rawTelemetryData = newTelemetryDictionary
         # print("NEW: ", self.rawTelemetryData) #TODO: Debugging purposes only, delete later
 
+    # Return the rawTelemetryData object
     def getRawTelemetryData(self):
         return self.rawTelemetryData
 

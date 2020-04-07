@@ -609,6 +609,9 @@ class Ui_MainWindow(object):
         # self.actionOn.setText(_translate("MainWindow", "On"))
         # self.actionOff.setText(_translate("MainWindow", "Off"))
 
+# =========================================================================================================== User Defined Methods
+
+    # Calls method in driver.py to update flag value used in the output log
     def connector_flagClicked(self):
 
         if (self.pushButton_tooBar_flag.isChecked()):
@@ -619,27 +622,30 @@ class Ui_MainWindow(object):
 
         QApplication.processEvents()
 
+    # Calls startTracking in driver.py which begins to read-in, process data, and update GUI
     def connector_startTracking(self):
-        # Pass start value set as 1 (True) to start tracking telemetry #Fixme: change this later
-        # startTime = datetime.datetime.now()
-        # self.label_infoBar_startTime.setText(startTime.strftime("Start Time: %H:%M:%S"))
-
+        # Initialize trackCondition for deciding if application should continue tracking data
         self.trackCondition = 1
+
+        # Execute startTracking method in driver.py while trackCondition is 1 (breaks when stopTracking is called)
         while (self.trackCondition):
             startTracking(self)
-            QApplication.processEvents()
+            QApplication.processEvents()    # Allow PyQt5 GUI to process changes and remain responsive
 
+    # Calls stopTracking method in driver.py which sets trackCondition to 0 and pauses application
     def connector_stopTracking(self):
-        # Pass stop value set as 1 (True) to stop tracking telemetry but not terminate program #FIXME: change this later
         stopTracking(self)
         QApplication.processEvents()
 
+    # Calls method to prompt user to select the .tel file via a Windows FileDialog
     def connector_openPCCTelemetryFile(self):
         openPCCTelemetryFile(self)
 
+    # Calls method to prompt user tot select the output file via a Windows FileDialog
     def connector_openOutputLogFile(self):
         Driver_openOutputLogFile(self)
 
+    # Calls method to prompt user to enter manually defined limits via Dialog (Outdated/No Longer Used)
     def connector_openLimitsDialog(self):
         openLimitsDialog(self)
 

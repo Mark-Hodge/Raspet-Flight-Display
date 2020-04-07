@@ -3,15 +3,16 @@ import time, datetime, math
 # ====================================================================================================================== Update HUD()
 from PyQt5.QtWidgets import QApplication
 
-
 def UpdateHUD(self, dataHandler):
 
     # TODO: NOTE  P,    Q,    R
     #           Roll, Pitch, Yaw
     #   Control Authority Equations, Correction -> PitchRate: 1.1(2.0761x + 7.3747)
 
+    # Fetch the most recently updated telemetry dictionary from the DataHandler
     dict = dataHandler.getRawTelemetryData()
 
+    # Attempt to fetch raw value from dictionary and convert to the necessary format (degrees or degrees/sec) and update the GUI
     try:
         # ----------------------------------------------------------- Elevator pos.
         elevatorDeflection= float(dict["<Surface6>"])
@@ -48,22 +49,25 @@ def UpdateHUD(self, dataHandler):
         CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler)
         CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler)
 
+        # Allow the GUI to process recent changes to update the display and remain responsive
         QApplication.processEvents()
 
         # Set position and rate values to dictionary to be written to output log.
         dataHandler.finalDataToLog["Clock[ms]"] = dict["<Clock>[ms]"]
 
+        # Store the position data in their degree formats in a dictionary used to write them to the log
         dataHandler.finalDataToLog["Elevator Deflection[deg]"] = elevatorDeflection
         dataHandler.finalDataToLog["Aileron Deflection[deg]"] = aileronDeflection
         dataHandler.finalDataToLog["Rudder Deflection[deg]"] = rudderDeflection
 
+        # store the rate data in their degree/sec formats in a dictionary used to write them to the log
         dataHandler.finalDataToLog["Pitch Rate[deg/s]"] = pitchRate
         dataHandler.finalDataToLog["Roll Rate[deg/s]"] = rollRate
         dataHandler.finalDataToLog["Yaw Rate[deg/s]"] = yawRate
 
     # FIXME: Re-write exception handling later, is for testing one update only
     except Exception as ex:
-        print("\n --> ERROR 1 handled, ", ex, "\n")
+        print("\nError occurred while attempting to update the Heads Up Display, ", ex, "\n")
 
 # ====================================================================================================================== Check Pitch Conditions()
 def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHandler):
@@ -91,7 +95,6 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
 
     # Evaluate absolute value of rate at or below the warning condition
     if (absoluteRate <= warningCondition):
-
         # Change and update the text and color of the labels/buttons
         self.label_pitchDeflectionValue.setText(labelValue)
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: red;}')
@@ -102,7 +105,6 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
 
     # Evaluate absolute value of rate between the alert condition and warning condition
     elif (absoluteRate <= alertCondition) and (absoluteRate > warningCondition):
-
         # Change and update the text and color of the labels/buttons
         self.label_pitchDeflectionValue.setText(labelValue)
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
@@ -112,7 +114,6 @@ def CheckPitchDeflectionConditions(self, elevatorDeflection, pitchRate, dataHand
         dataHandler.finalDataToLog["Pitch Deflection State"] = "Alert"
 
     else:
-
         # Change and update the text and color of the labels/buttons
         self.label_pitchDeflectionValue.setText(labelValue)
         self.pushButton_pitchDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
@@ -147,7 +148,6 @@ def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler
 
     # Evaluate absolute value of rate at or below the warning condition
     if (absoluteRate <= warningCondition):
-
         # Change and update the text and color of the labels/buttons
         self.label_rollDeflectionValue.setText(labelValue)
         self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: red;}')
@@ -158,7 +158,6 @@ def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler
 
     # Evaluate absolute value of rate between the alert condition and warning condition
     elif (absoluteRate <= alertCondition) and (absoluteRate > warningCondition):
-
         # Change and update the text and color of the labels/buttons
         self.label_rollDeflectionValue.setText(labelValue)
         self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
@@ -168,7 +167,6 @@ def CheckRollDeflectionConditions(self, aileronDeflection, rollRate, dataHandler
         dataHandler.finalDataToLog["Roll Deflection State"] = "Alert"
 
     else:
-
         # Change and update the text and color of the labels/buttons
         self.label_rollDeflectionValue.setText(labelValue)
         self.pushButton_rollDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')
@@ -203,7 +201,6 @@ def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):
 
     # Evaluate absolute value of rate at or below the warning condition
     if (absoluteRate <= warningCondition):
-
         # Change and update the text and color of the labels/buttons
         self.label_yawDeflectionValue.setText(labelValue)
         self.pushButton_yawDeflection.setStyleSheet('QPushButton {background-color: red;}')
@@ -214,7 +211,6 @@ def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):
 
     # Evaluate absolute value of rate between the alert condition and warning condition
     elif (absoluteRate <= alertCondition) and (absoluteRate > warningCondition):
-
         # Change and update the text and color of the labels/buttons
         self.label_yawDeflectionValue.setText(labelValue)
         self.pushButton_yawDeflection.setStyleSheet('QPushButton {background-color: yellow;}')
@@ -224,7 +220,6 @@ def CheckYawDeflectionConditions(self, rudderDeflection, yawRate, dataHandler):
         dataHandler.finalDataToLog["Yaw Deflection State"] = "Alert"
 
     else:
-
         # Change and update the text and color of the labels/buttons
         self.label_yawDeflectionValue.setText(labelValue)
         self.pushButton_yawDeflection.setStyleSheet('QPushButton {background-color: #e1e1e1;}')

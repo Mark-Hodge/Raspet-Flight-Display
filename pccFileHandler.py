@@ -57,11 +57,16 @@ def openFile(self, dataHandlerInstance):
 # ====================================================================================================================== Write To Log()
 def writeToLogFile(dataHandlerInstance):
 
+    # Evaluate if the user ever defined an output file to log to, if they did not then ignore the rest of this method
     if (dataHandlerInstance.getWriter() == ""):
         pass
 
+    # If condition fails and writer is not null, evaluate the flag state and write the appropriate data to log
     else:
+        # Evaluate is the flag is set to 1 or 0 (important or standard)
         if (dataHandlerInstance.getFlagState()):
+
+            # Write data to log under the flag 1, marked as important
             dataHandlerInstance.writer.writerow({"Flag": "1", "Clock[ms]": dataHandlerInstance.finalDataToLog["Clock[ms]"], "Elevator Deflection[deg]": dataHandlerInstance.finalDataToLog["Elevator Deflection[deg]"],
                                                  "Pitch Rate[deg/s]": dataHandlerInstance.finalDataToLog["Pitch Rate[deg/s]"], "Aileron Deflection[deg]": dataHandlerInstance.finalDataToLog["Aileron Deflection[deg]"],
                                                  "Roll Rate[deg/s]": dataHandlerInstance.finalDataToLog["Roll Rate[deg/s]"], "Rudder Deflection[deg]": dataHandlerInstance.finalDataToLog["Rudder Deflection[deg]"],
@@ -71,6 +76,7 @@ def writeToLogFile(dataHandlerInstance):
                                                  "Yaw Rate Alert Condition[deg]": dataHandlerInstance.finalDataToLog["Yaw Rate Alert Condition[deg]"], "Pitch Deflection State": dataHandlerInstance.finalDataToLog["Pitch Deflection State"],
                                                  "Roll Deflection State": dataHandlerInstance.finalDataToLog["Roll Deflection State"], "Yaw Deflection State": dataHandlerInstance.finalDataToLog["Yaw Deflection State"]})
 
+        # Write the data to log under the flag 0, marked as standard
         else:
             dataHandlerInstance.writer.writerow({"Flag": "0", "Clock[ms]": dataHandlerInstance.finalDataToLog["Clock[ms]"], "Elevator Deflection[deg]": dataHandlerInstance.finalDataToLog["Elevator Deflection[deg]"],
                                                  "Pitch Rate[deg/s]": dataHandlerInstance.finalDataToLog["Pitch Rate[deg/s]"], "Aileron Deflection[deg]": dataHandlerInstance.finalDataToLog["Aileron Deflection[deg]"],

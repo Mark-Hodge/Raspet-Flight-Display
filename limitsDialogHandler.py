@@ -1,4 +1,3 @@
-
 # from limitsdialog import Ui_Dialog as Form
 from dataHandler import DataHandler
 from driver import *
