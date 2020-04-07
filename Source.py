@@ -1,9 +1,3 @@
-"""
-Copyright (c) 2019 Mark Hodge
-Version 1.0.0
-Last Update: August 23, 2019 12:27:00 CST
-"""
-
 import os
 import csv
 import math
