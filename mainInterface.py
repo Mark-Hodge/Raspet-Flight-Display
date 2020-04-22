@@ -278,6 +278,7 @@ class Ui_MainWindow(object):
         self.pushButton_pitchDeflection.setObjectName("pushButton_pitchDeflection")
         self.verticalLayout_8.addWidget(self.pushButton_pitchDeflection)
         self.label_pitchDeflection = QtWidgets.QLabel(self.centralwidget)
+        self.label_pitchDeflection.setToolTip("")
         self.label_pitchDeflection.setAlignment(QtCore.Qt.AlignCenter)
         self.label_pitchDeflection.setObjectName("label_pitchDeflection")
         self.verticalLayout_8.addWidget(self.label_pitchDeflection)
@@ -288,6 +289,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addWidget(self.label_pitchDeflectionValue)
         spacerItem23 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_8.addItem(spacerItem23)
+        self.pushButton_pitchDefelction_DirectionUp = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_pitchDefelction_DirectionUp.setFlat(False)
+        self.pushButton_pitchDefelction_DirectionUp.setObjectName("pushButton_pitchDefelction_DirectionUp")
+        self.verticalLayout_8.addWidget(self.pushButton_pitchDefelction_DirectionUp)
+        self.pushButton_pitchDeflection_DirectionDown = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_pitchDeflection_DirectionDown.setObjectName("pushButton_pitchDeflection_DirectionDown")
+        self.verticalLayout_8.addWidget(self.pushButton_pitchDeflection_DirectionDown)
         self.horizontalLayout_4.addLayout(self.verticalLayout_8)
         spacerItem24 = QtWidgets.QSpacerItem(550, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem24)
@@ -322,6 +330,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.addWidget(self.label_rollDeflectionValue)
         spacerItem26 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_9.addItem(spacerItem26)
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setMinimumSize(QtCore.QSize(62, 66))
+        self.pushButton_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout_6.addWidget(self.pushButton_2)
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setMinimumSize(QtCore.QSize(62, 66))
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout_6.addWidget(self.pushButton)
+        self.verticalLayout_9.addLayout(self.horizontalLayout_6)
         self.horizontalLayout_4.addLayout(self.verticalLayout_9)
         spacerItem27 = QtWidgets.QSpacerItem(550, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem27)
@@ -489,13 +509,13 @@ class Ui_MainWindow(object):
         self.menuFile.setObjectName("menuFile")
         self.menuLog = QtWidgets.QMenu(self.menubar)
         self.menuLog.setObjectName("menuLog")
-
+        
         # self.menuLimits = QtWidgets.QMenu(self.menubar)
         # self.menuLimits.setObjectName("menuLimits")
         # self.menuTrack_Position_Rate_Limits = QtWidgets.QMenu(self.menuLimits)
         # self.menuTrack_Position_Rate_Limits.setObjectName("menuTrack_Position_Rate_Limits")
         MainWindow.setMenuBar(self.menubar)
-
+        
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -507,7 +527,7 @@ class Ui_MainWindow(object):
         self.actionOpen_Existing_Output_Log.setObjectName("actionOpen_Existing_Output_Log")
         self.actionNew_Output_Log_File = QtWidgets.QAction(MainWindow)
         self.actionNew_Output_Log_File.setObjectName("actionNew_Output_Log_File")
-
+        
         # self.actionDefine_Manual_Limts = QtWidgets.QAction(MainWindow)
         # self.actionDefine_Manual_Limts.setObjectName("actionDefine_Manual_Limts")
         # self.actionOn = QtWidgets.QAction(MainWindow)
@@ -517,40 +537,41 @@ class Ui_MainWindow(object):
         # self.actionOff.setCheckable(True)
         # self.actionOff.setChecked(True)
         # self.actionOff.setObjectName("actionOff")
-
+        
         self.menuFile.addAction(self.actionOpen_PCC_Telemetry_File)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuLog.addAction(self.actionOpen_Existing_Output_Log)
         self.menuLog.addAction(self.actionNew_Output_Log_File)
-
+        
         # self.menuTrack_Position_Rate_Limits.addAction(self.actionOn)
         # self.menuTrack_Position_Rate_Limits.addAction(self.actionOff)
         # self.menuLimits.addAction(self.actionDefine_Manual_Limts)
         # self.menuLimits.addAction(self.menuTrack_Position_Rate_Limits.menuAction())
-
+        
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuLog.menuAction())
-
-        # self.menubar.addAction(self.menuLimits.menuAction())
+        
+        #self.menubar.addAction(self.menuLimits.menuAction())
 
         # Button / Action Connectors
         self.retranslateUi(MainWindow)
-        # self.pushButton_toolBar_stop.clicked.connect(MainWindow.close)
+        
+        #self.pushButton_toolBar_stop.clicked.connect(MainWindow.close)
+        
         self.actionExit.triggered.connect(MainWindow.close)
-
+        
         # self.actionOff.triggered['bool'].connect(self.actionOn.toggle)
         # self.actionOn.triggered['bool'].connect(self.actionOff.toggle)
-
+        
         self.actionOpen_PCC_Telemetry_File.triggered.connect(self.connector_openPCCTelemetryFile)
         self.actionOpen_Existing_Output_Log.triggered.connect(self.connector_openOutputLogFile)
         self.actionNew_Output_Log_File.triggered.connect(self.connector_openOutputLogFile)
-
-        # self.actionDefine_Manual_Limts.triggered.connect(self.connector_openLimitsDialog)
-
+        
         self.pushButton_tooBar_flag.clicked.connect(self.connector_flagClicked)
         self.pushButton_toolBar_start.clicked.connect(self.connector_startTracking)
         self.pushButton_toolBar_stop.clicked.connect(self.connector_stopTracking)
+        
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -574,41 +595,62 @@ class Ui_MainWindow(object):
         self.pushButton_rudderPosition.setText(_translate("MainWindow", "Normal"))
         self.label_rudderPosition.setText(_translate("MainWindow", "Rudder Pos. (deg)"))
         self.label_rudderPositionValue.setText(_translate("MainWindow", "null"))
+        self.pushButton_pitchDeflection.setToolTip(_translate("MainWindow", "Indicates Normal/Alert/Warning depending on the current pitch rate"))
         self.pushButton_pitchDeflection.setText(_translate("MainWindow", "Normal"))
         self.label_pitchDeflection.setText(_translate("MainWindow", "Pitch Deflection"))
         self.label_pitchDeflectionValue.setText(_translate("MainWindow", "null"))
+        self.pushButton_pitchDefelction_DirectionUp.setToolTip(_translate("MainWindow", "Indicates pitch up"))
+        self.pushButton_pitchDefelction_DirectionUp.setText(_translate("MainWindow", "Pitch Up"))
+        self.pushButton_pitchDeflection_DirectionDown.setToolTip(_translate("MainWindow", "Indicates pitch down"))
+        self.pushButton_pitchDeflection_DirectionDown.setText(_translate("MainWindow", "Pitch Down"))
+        self.pushButton_rollDeflection.setToolTip(_translate("MainWindow", "Indicates Normal/Alert/Warning depending on the current roll rate"))
         self.pushButton_rollDeflection.setText(_translate("MainWindow", "Normal"))
         self.label_rollDeflection.setText(_translate("MainWindow", "Roll Deflection"))
         self.label_rollDeflectionValue.setText(_translate("MainWindow", "null"))
+        self.pushButton_2.setToolTip(_translate("MainWindow", "Indicates roll left"))
+        self.pushButton_2.setText(_translate("MainWindow", "Roll Left"))
+        self.pushButton.setToolTip(_translate("MainWindow", "Indicates roll right"))
+        self.pushButton.setText(_translate("MainWindow", "Roll Right"))
+        self.pushButton_yawDeflection.setToolTip(_translate("MainWindow", "Indicates Normal/Alert/Warning depending on the current yaw rate"))
         self.pushButton_yawDeflection.setText(_translate("MainWindow", "Normal"))
         self.label_yawDeflection.setText(_translate("MainWindow", "Yaw Deflection"))
         self.label_yawDeflectionValue.setText(_translate("MainWindow", "null"))
+        self.label_infoBar_status.setToolTip(_translate("MainWindow", "Current state of the program (Idle/Running/Stopped)"))
         self.label_infoBar_status.setText(_translate("MainWindow", "Status: Idle"))
-        # self.label_infoBar_limits.setText(_translate("MainWindow", "Manual Limits: Off"))
-        self.label_infoBar_limits.setText(_translate("MainWindow", ""))
+        
+        #self.label_infoBar_limits.setText(_translate("MainWindow", "Manual Limits: Off"))
+        
+        self.label_infoBar_output.setToolTip(_translate("MainWindow", ".csv file which output will be logged to"))
         self.label_infoBar_output.setText(_translate("MainWindow", "Output Log: Off"))
+        self.label_infoBar_startTime.setToolTip(_translate("MainWindow", "Time of start"))
         self.label_infoBar_startTime.setText(_translate("MainWindow", "Start Time: 00:00:00"))
+        self.label_infoBar_elapsedTime.setToolTip(_translate("MainWindow", "Time since start"))
         self.label_infoBar_elapsedTime.setText(_translate("MainWindow", "Elapsed Time: 00:00:00"))
+        self.label_infoBar_PCCTime.setToolTip(_translate("MainWindow", "Timestamp of most recent data read in from telemetry file"))
         self.label_infoBar_PCCTime.setText(_translate("MainWindow", "PCC Time: 00:00:00"))
+        self.label_toolBar_PCCFile.setToolTip(_translate("MainWindow", "Source file containing the raw data which will be read in"))
         self.label_toolBar_PCCFile.setText(_translate("MainWindow", "PCC Telemetry File: N/A"))
+        self.pushButton_tooBar_flag.setToolTip(_translate("MainWindow", "Marks the current data as important in the output log"))
         self.pushButton_tooBar_flag.setText(_translate("MainWindow", "Flag"))
+        self.pushButton_toolBar_start.setToolTip(_translate("MainWindow", "Starts tracking incoming data from the telemetry file selected"))
         self.pushButton_toolBar_start.setText(_translate("MainWindow", "Start"))
+        self.pushButton_toolBar_stop.setToolTip(_translate("MainWindow", "Pauses tracking of incoming data. Select \'Start\' to resume with the most recent data from the telemetry file"))
         self.pushButton_toolBar_stop.setText(_translate("MainWindow", "Stop"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuLog.setTitle(_translate("MainWindow", "Log"))
-
-        # self.menuLimits.setTitle(_translate("MainWindow", "Limits"))
-        # self.menuTrack_Position_Rate_Limits.setTitle(_translate("MainWindow", "Track Manual Limits"))
-
+        
+        #self.menuLimits.setTitle(_translate("MainWindow", "Limits"))
+        #self.menuTrack_Position_Rate_Limits.setTitle(_translate("MainWindow", "Track Manual Limits"))
+        
         self.actionOpen_PCC_Telemetry_File.setText(_translate("MainWindow", "Open PCC Telemetry File..."))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
         self.actionOpen_Existing_Output_Log.setText(_translate("MainWindow", "Open Existing Output Log File..."))
         self.actionNew_Output_Log_File.setText(_translate("MainWindow", "New Output Log File"))
-
+        
         # self.actionDefine_Manual_Limts.setText(_translate("MainWindow", "Manually Define Limts"))
         # self.actionOn.setText(_translate("MainWindow", "On"))
         # self.actionOff.setText(_translate("MainWindow", "Off"))
-
+        
 # =========================================================================================================== User Defined Methods
 
     # Calls method in driver.py to update flag value used in the output log
