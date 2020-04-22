@@ -5,12 +5,16 @@ Raspet Flight Display
    https://github.com/Mark-Hodge/Raspet-Flight-Display
 """
 from PyQt5.QtCore import QThreadPool, QRunnable, pyqtSlot
-from limitsdialog import Ui_Dialog as Form, Ui_Dialog
 from dataTransformer import *
 from pccFileHandler import *
 from dataHandler import DataHandler
 from dataValidator import *
 from mainInterface import *
+
+""" No longer need to import limits dialog as manually defined limts by the user are no longer
+    needed/used. Leaving the import here for now but commented out in case the feature for manual
+    limits ever needs to be enabled again (unlikely).
+from limitsdialog import Ui_Dialog as Form, Ui_Dialog """
 
 # Initialize a new DataHandler() class instance for storing/updating
 # important information used to maintain successful execution.
