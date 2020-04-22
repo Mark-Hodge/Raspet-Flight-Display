@@ -1,9 +1,3 @@
-"""
-Copyright (c) 2019 Mark Hodge
-Version 1.0.0
-Last Update: August 23, 2019 12:27:00 CST
-"""
-
 import os
 import csv
 import math
@@ -724,7 +718,7 @@ class Interface:
                 integrity07 = float(integrity07)
 
 
-        # Catch exception raised and print currupted values and full set to console for analyzing. Dictionary is not passed to be used
+        # Catch exception raised and print corrupted values and full set to console for analyzing. Dictionary is not passed to be used
         # in updating display. Values are ignored and program writes over dictionary with next loop.
         except Exception as ex2:
             print("Integrity Check Failed: truncating entry. --> ", self.telemetry_data['<Clock>[ms]'], self.telemetry_data['<AP_Global>'],
