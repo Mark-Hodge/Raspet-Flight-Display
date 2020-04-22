@@ -2,7 +2,7 @@
 All changes to this project will be documented in this file.
 - Project Conception: 2019-05-09
 - First Full Release: 2019-07-09  [Version 1.0.0]
-- Second Full Release: 2019-04-07 [Version 2.0.1]
+- Second Full Release: 2020-04-07 [Version 2.0.0]
 - Updates Since First Release: 4
 
 ## [2.0.0] - 2020-04-07 10:19:17 CST
@@ -22,7 +22,7 @@ All changes to this project will be documented in this file.
 - Interface inplemented in Tkinter
 - Complicated and dense methods that were inefficient and not developer friendly
 
-## [1.0.0] - 2019-08-23 12:37:00 CST
+## [1.0.3] - 2019-08-23 12:37:00 CST
 ### Added
 - Instruction Manual to accompany program.
 
@@ -34,7 +34,7 @@ All changes to this project will be documented in this file.
 ### Removed
 - cluttering code and non-functional lines previously used for test-cases and debugging purposes.
   
-## [1.0.1] - 2019-07-17 12:37:00 CST
+## [1.0.2] - 2019-07-17 12:37:00 CST
 ### Added
 - Limits window now closes after a successful set button click.
 - User can now choose to run with or without writing output to a log file.
