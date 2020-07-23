@@ -64,7 +64,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_6">
+         <widget class="QPushButton" name="pushButton_pitchRate">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -98,7 +98,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_11">
+         <widget class="QLabel" name="label_pitchRate">
           <property name="text">
            <string>Pitch Rate (deg/s)</string>
           </property>
@@ -108,7 +108,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_10">
+         <widget class="QLabel" name="label_pitchRateValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -173,7 +173,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_7">
+         <widget class="QPushButton" name="pushButton_rollRate">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -215,7 +215,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_12">
+         <widget class="QLabel" name="label_rollRate">
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
           </property>
@@ -231,7 +231,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_13">
+         <widget class="QLabel" name="label_rollRateValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -293,7 +293,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_8">
+         <widget class="QPushButton" name="pushButton_yawRate">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -327,7 +327,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_14">
+         <widget class="QLabel" name="label_yawRate">
           <property name="text">
            <string>Yaw Rate (deg/s)</string>
           </property>
@@ -337,7 +337,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_15">
+         <widget class="QLabel" name="label_yawRateValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -419,7 +419,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_elevatorPosition">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -453,7 +453,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="label_elevatorPosition">
           <property name="text">
            <string>Elevator Pos. (deg)</string>
           </property>
@@ -463,7 +463,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="label_elevatorPositionValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -525,7 +525,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pushButton_aileronPosition">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -559,7 +559,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="label_aileronPosition">
           <property name="text">
            <string>Aileron Pos. (deg)</string>
           </property>
@@ -569,7 +569,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_5">
+         <widget class="QLabel" name="label_aileronPositionValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -631,7 +631,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="pushButton_rudderPosition">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -665,7 +665,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="label_rudderPosition">
           <property name="text">
            <string>Rudder Pos. (deg)</string>
           </property>
@@ -675,7 +675,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_7">
+         <widget class="QLabel" name="label_rudderPositionValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -780,7 +780,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_9">
+         <widget class="QPushButton" name="pushButton_pitchDeflection">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -799,6 +799,9 @@
             <kerning>true</kerning>
            </font>
           </property>
+          <property name="toolTip">
+           <string>Indicates Normal/Alert/Warning depending on the current pitch rate</string>
+          </property>
           <property name="text">
            <string>Normal</string>
           </property>
@@ -814,7 +817,10 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_16">
+         <widget class="QLabel" name="label_pitchDeflection">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="text">
            <string>Pitch Deflection</string>
           </property>
@@ -824,7 +830,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_17">
+         <widget class="QLabel" name="label_pitchDeflectionValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -848,6 +854,29 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_pitchDefelction_DirectionUp">
+          <property name="toolTip">
+           <string>Indicates pitch up</string>
+          </property>
+          <property name="text">
+           <string>Pitch Up</string>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_pitchDeflection_DirectionDown">
+          <property name="toolTip">
+           <string>Indicates pitch down</string>
+          </property>
+          <property name="text">
+           <string>Pitch Down</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -886,7 +915,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_10">
+         <widget class="QPushButton" name="pushButton_rollDeflection">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -905,6 +934,9 @@
             <kerning>true</kerning>
            </font>
           </property>
+          <property name="toolTip">
+           <string>Indicates Normal/Alert/Warning depending on the current roll rate</string>
+          </property>
           <property name="text">
            <string>Normal</string>
           </property>
@@ -920,7 +952,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_18">
+         <widget class="QLabel" name="label_rollDeflection">
           <property name="text">
            <string>Roll Deflection</string>
           </property>
@@ -930,7 +962,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_19">
+         <widget class="QLabel" name="label_rollDeflectionValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -954,6 +986,45 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="minimumSize">
+             <size>
+              <width>62</width>
+              <height>66</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Indicates roll left</string>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>Roll Left</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="minimumSize">
+             <size>
+              <width>62</width>
+              <height>66</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Indicates roll right</string>
+            </property>
+            <property name="text">
+             <string>Roll Right</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -992,7 +1063,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_11">
+         <widget class="QPushButton" name="pushButton_yawDeflection">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1011,6 +1082,9 @@
             <kerning>true</kerning>
            </font>
           </property>
+          <property name="toolTip">
+           <string>Indicates Normal/Alert/Warning depending on the current yaw rate</string>
+          </property>
           <property name="text">
            <string>Normal</string>
           </property>
@@ -1026,7 +1100,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_20">
+         <widget class="QLabel" name="label_yawDeflection">
           <property name="text">
            <string>Yaw Deflection</string>
           </property>
@@ -1036,7 +1110,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_21">
+         <widget class="QLabel" name="label_yawDeflectionValue">
           <property name="contextMenuPolicy">
            <enum>Qt::DefaultContextMenu</enum>
           </property>
@@ -1090,7 +1164,7 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="label_infoBar_status">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -1102,6 +1176,9 @@
           <width>95</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Current state of the program (Idle/Running/Stopped)</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Panel</enum>
@@ -1131,7 +1208,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_22">
+       <widget class="QLabel" name="label_infoBar_limits">
         <property name="minimumSize">
          <size>
           <width>145</width>
@@ -1166,7 +1243,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="label_infoBar_output">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -1184,6 +1261,9 @@
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="toolTip">
+         <string>.csv file which output will be logged to</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Panel</enum>
@@ -1216,7 +1296,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_25">
+       <widget class="QLabel" name="label_infoBar_startTime">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -1228,6 +1308,9 @@
           <width>135</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Time of start</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Panel</enum>
@@ -1257,7 +1340,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_23">
+       <widget class="QLabel" name="label_infoBar_elapsedTime">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -1269,6 +1352,9 @@
           <width>150</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Time since start</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Panel</enum>
@@ -1298,7 +1384,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_24">
+       <widget class="QLabel" name="label_infoBar_PCCTime">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -1310,6 +1396,9 @@
           <width>130</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Timestamp of most recent data read in from telemetry file</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Panel</enum>
@@ -1346,7 +1435,7 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="label_toolBar_PCCFile">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -1365,6 +1454,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="toolTip">
+         <string>Source file containing the raw data which will be read in</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::Box</enum>
         </property>
@@ -1380,7 +1472,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_tooBar_flag">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -1393,8 +1485,11 @@
           <height>25</height>
          </size>
         </property>
+        <property name="toolTip">
+         <string>Marks the current data as important in the output log</string>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Flag</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -1402,7 +1497,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="pushButton_toolBar_start">
+        <property name="toolTip">
+         <string>Starts tracking incoming data from the telemetry file selected</string>
+        </property>
         <property name="text">
          <string>Start</string>
         </property>
@@ -1412,7 +1510,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_12">
+       <widget class="QPushButton" name="pushButton_toolBar_stop">
+        <property name="toolTip">
+         <string>Pauses tracking of incoming data. Select 'Start' to resume with the most recent data from the telemetry file</string>
+        </property>
         <property name="text">
          <string>Stop</string>
         </property>
@@ -1428,7 +1529,7 @@
      <x>0</x>
      <y>0</y>
      <width>1600</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1513,7 +1614,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_12</sender>
+   <sender>pushButton_toolBar_stop</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
